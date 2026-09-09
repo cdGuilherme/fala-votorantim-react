@@ -1,2 +1,3 @@
 # fala-votorantim-react
-## opa
+
+Não se esqueça de fazer `npm run build` antes de cada commit
