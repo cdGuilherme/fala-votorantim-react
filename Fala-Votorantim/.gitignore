@@ -23,4 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+# apagar informações importantes
 .env
+
+# apagar o próprio 
