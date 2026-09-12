@@ -1,64 +1,77 @@
 :root
-{
-    /*cores principais*/
-        --cor-principal: ;
-        --cor-principal-escura: ;
-        --cor-principal-clara: ;
+    {
+        /*cores principais*/
+            --cor-principal: #1447E6;
+            --cor-principal-escura: #193CB8;
+            --cor-principal-clara: #155DFC;
 
-    /*Detalhes de letra*/
-        /*texto contra fundo azul*/
-        --detalhe-azul: ;
+        /*Detalhes de letra*/
+            /*texto contra fundo azul*/
+            --detalhe-azul: #1C398E;
 
-        /*Texto contra fundo verde*/
-        --detalhe-verde: ;
+            /*Texto contra fundo verde*/
+            --detalhe-verde: #0D542B;
 
-        /*Texto contra fundo amarelo*/
-        --detalhe-laranja: ;
+            /*Texto contra fundo amarelo*/
+            --detalhe-laranja: #A65F00;
 
-        /*Texto em elemento cinza*/
-        --detalhe-cinza: ;
+            /*Texto em elemento cinza*/
+            --detalhe-cinza: #364153;
 
-    /*Cores neutras*/
+        /*Cores neutras*/
 
-        /*h2, Fundo footer*/
-        --cor-preta: ;
+            /*h2, Fundo footer*/
+            --cor-preta: #1E2939;
 
-        /*paragrafos*/
-        --cor-cinza-escuro: ;
+            /*paragrafos*/
+            --cor-cinza-escuro: #4A5565;
 
-        /*paragrafo do footer*/
-        --cor-cinza: ;
+            /*___________________________________________________________*/
 
-        /*Fundo não-focado*/
-        --cor-cinza-claro: ;
+            /*paragrafo do footer*/
+            --cor-cinza: #99A1AF;
 
-        /*h1, fundo-focado*/
-        --cor-branco: ;
+            /*Fundo não-focado*/
+            --cor-cinza-claro: #E9F0FF;
 
-    /*Cores Extras*/
+            /*h1, fundo-focado*/
+            --cor-branco: #FFFFFF;
 
-        
-        --borda-verde: ;
+        /*Cores Extras*/
 
-        --fundo-verde: ;
+            /*___________________________________________________________*/    
 
-        --borda-roxo: ;
+            --borda-verde: #00A63E;
 
-        --fundo-roxo: ;
+            --fundo-verde: #F0FDF4;
 
-        --borda-laranja: ;
+            /*___________________________________________________________*/
 
-        --fundo-laranja: ;
+            --borda-roxo: #9810FA;
 
-        --borda-amarela: ;
+            --fundo-roxo: #FAF5FF;
 
-        --fundo-amarelo: ;
+            /*___________________________________________________________*/
 
-        --borda-azul-claro: ;
-        
-        --fundo-azul-claro: ;
+            --borda-laranja: #FF6900;
 
-        --borda-verde-claro: ;
+            --fundo-laranja: #FFEDD4;
 
-        --fundo-verde-claro: ;
-}
+            /*___________________________________________________________*/
+
+            --borda-amarela: #FFF085;
+
+            --fundo-amarelo: #FEFCE8;
+
+            /*___________________________________________________________*/
+
+            --borda-azul-claro: #BEDBFF;
+            
+            --fundo-azul-claro: #EFF6FF;
+
+            /*___________________________________________________________*/
+
+            --borda-verde-claro: #B9F8CF;
+
+            --fundo-verde-claro: #F0FDF4;
+    }
