@@ -1,7 +1,9 @@
-import Header from "../../../Components/Header";
+import Header from './../../../Components/Header';
 
-export default function LandingPage() {
+function LandingPage() {
     return(
         <Header/>
     )
 }
+
+export default LandingPage;
