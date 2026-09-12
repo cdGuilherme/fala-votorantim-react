@@ -1,6 +1,7 @@
 function FeedDenuncias()
 {
-    return(<></>)
+    return(<>
+    </>)
 }
 
 export default FeedDenuncias;

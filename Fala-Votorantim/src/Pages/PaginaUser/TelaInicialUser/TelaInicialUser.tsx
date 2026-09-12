@@ -1,6 +1,8 @@
 function TelaInicialUser()
 {
-    return(<></>)
+    return(<>
+    
+    </>)
 }
 
 export default TelaInicialUser;

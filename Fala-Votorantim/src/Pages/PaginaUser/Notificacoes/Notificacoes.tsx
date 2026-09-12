@@ -1,6 +1,8 @@
 function Notificacoes()
 {
-    return(<></>)
+    return(<>
+    
+    </>)
 }
 
 export default Notificacoes;

@@ -1,6 +1,8 @@
 function MinhasDenuncias()
 {
-    return(<></>)
+    return(<>
+    
+    </>)
 }
 
 export default MinhasDenuncias;
