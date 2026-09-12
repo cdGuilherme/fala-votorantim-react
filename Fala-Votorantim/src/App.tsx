@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // Páginas inicias
 
-import LadingPage from './Pages/PaginaPrincipal/LadingPage/LadingPage'
+import LadingPage from './Pages/PaginaPrincipal/LandingPage/LandingPage';
 import Sobre from './Pages/PaginaPrincipal/SobreNos/SobreNos'
 import FeedDenuncia from './Pages/PaginaPrincipal/FeedDenuncias/FeedDenuncias'
 import Registro from './Pages/PaginaPrincipal/Registro/Registro'
