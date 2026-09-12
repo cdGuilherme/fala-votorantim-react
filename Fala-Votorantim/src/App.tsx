@@ -1,12 +1,10 @@
-import './App.css'
+import LandingPage from "./Pages/PaginaPrincipal/LadingPage/LadingPage";
 
 function App() {
 
 
   return (
-    <>
-      oie
-    </>
+    <LandingPage/>
   )
 }
 
