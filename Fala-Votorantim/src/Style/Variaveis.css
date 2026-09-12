@@ -1,0 +1,64 @@
+:root
+{
+    /*cores principais*/
+        --cor-principal: ;
+        --cor-principal-escura: ;
+        --cor-principal-clara: ;
+
+    /*Detalhes de letra*/
+        /*texto contra fundo azul*/
+        --detalhe-azul: ;
+
+        /*Texto contra fundo verde*/
+        --detalhe-verde: ;
+
+        /*Texto contra fundo amarelo*/
+        --detalhe-laranja: ;
+
+        /*Texto em elemento cinza*/
+        --detalhe-cinza: ;
+
+    /*Cores neutras*/
+
+        /*h2, Fundo footer*/
+        --cor-preta: ;
+
+        /*paragrafos*/
+        --cor-cinza-escuro: ;
+
+        /*paragrafo do footer*/
+        --cor-cinza: ;
+
+        /*Fundo não-focado*/
+        --cor-cinza-claro: ;
+
+        /*h1, fundo-focado*/
+        --cor-branco: ;
+
+    /*Cores Extras*/
+
+        
+        --borda-verde: ;
+
+        --fundo-verde: ;
+
+        --borda-roxo: ;
+
+        --fundo-roxo: ;
+
+        --borda-laranja: ;
+
+        --fundo-laranja: ;
+
+        --borda-amarela: ;
+
+        --fundo-amarelo: ;
+
+        --borda-azul-claro: ;
+        
+        --fundo-azul-claro: ;
+
+        --borda-verde-claro: ;
+
+        --fundo-verde-claro: ;
+}
