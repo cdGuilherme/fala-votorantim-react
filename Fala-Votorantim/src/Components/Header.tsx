@@ -1,4 +1,12 @@
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+
+const links = [
+    {link:"/", label: "Início"},
+    {link:"/Sobre", label: "Sobre"},
+    {link:"/Feed", label: "Feed"},
+    {link:"/Login", label: "Login"},
+    {link:"/Cadastrar", label: "Cadastrar"},
+]
 
 export default function Header() {
     return(
@@ -9,11 +17,21 @@ export default function Header() {
                     <h1>Fala Votorantim</h1>
                 </div>
                 <div className="flex items-center gap-8">
-                    <Link to="/" className="flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md">Início</Link>
-                    <Link to="/Sobre" className="flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md">Sobre Nós</Link>
-                    <Link to="/Feed" className="flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md">Feed de Denúncias</Link>
-                    <Link to="/Login" className="flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md">Login</Link>
-                    <Link to="/Cadastrar" className="flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md">Cadastrar</Link>
+                    {links.map((dado) => {
+                        return(
+                            <NavLink to={dado.link}
+                            end={dado.link === "/"}
+                            className={({isActive}) => {
+                                return isActive ?
+                                "flex h-10 items-center justify-center bg-[#155DFC] p-5 rounded-md" :
+                                "flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md"
+                            }}
+                            key={dado.link}>
+                                {dado.label}
+                            </NavLink>
+                        )
+                    })}
+                    
                 </div>
             </div>
         </header>
