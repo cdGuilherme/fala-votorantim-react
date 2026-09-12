@@ -23,6 +23,10 @@ import MeusDados from './Pages/PaginaUser/MeusDados/MeusDados'
 import Notificacoes from './Pages/PaginaUser/Notificacoes/Notificacoes'
 import MinhasDenuncias from './Pages/PaginaUser/MinhasDenuncias/MinhasDenuncias'
 
+{/* em Comum entre eles */}
+
+import CadastroDenuncias from './Pages/CadastroDenuncias/CadastroDenunciasUser'
+
 
 
 
@@ -51,6 +55,9 @@ function App() {
         <Route path='/users/MeusDados' element={<MeusDados />}/>
         <Route path='/users/notificacoes' element={<Notificacoes/>}/>
         <Route path='/users/MinhasDenuncias' element={<MinhasDenuncias/>}/>
+
+        {/*em comum entre eles */}
+        <Route path='/CadastroDenuncia' element={<CadastroDenuncias/>}/>
       </Routes>
     </BrowserRouter>
   )
