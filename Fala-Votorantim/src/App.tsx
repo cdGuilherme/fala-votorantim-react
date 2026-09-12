@@ -13,7 +13,7 @@ import Registro from './Pages/PaginaPrincipal/Registro/Registro'
 
 import TelaInicialADM from './Pages/PaginaADM/TelaInicial/TelaInicial'
 import DashboardADM from './Pages/PaginaADM/Dashboard/Dashboard'
-import FeedDenuncias from './Pages/PaginaADM/FeedDenuncias/FeedDenuncias'
+import FeedDenunciasADM from './Pages/PaginaADM/FeedDenuncias/FeedDenuncias'
 
 
 {/* Users */}
