@@ -14,7 +14,7 @@ export default function Header() {
             <div className="flex place-content-between h-[96px] mx-5">
                 <div className="flex items-center gap-5">
                     <img src="/Logo.png" alt="Logo" className="w-[64px] h-[64px] rounded-[50%]" />
-                    <h1>Fala Votorantim</h1>
+                    <h1 className="text-white">Fala Votorantim</h1>
                 </div>
                 <div className="flex items-center gap-8">
                     {links.map((dado) => {
@@ -23,8 +23,8 @@ export default function Header() {
                             end={dado.link === "/"}
                             className={({isActive}) => {
                                 return isActive ?
-                                "flex h-10 items-center justify-center bg-[#155DFC] p-5 rounded-md" :
-                                "flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md"
+                                "flex h-10 items-center justify-center bg-[#155DFC] p-5 rounded-md text-white" :
+                                "flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md text-white"
                             }}
                             key={dado.link}>
                                 {dado.label}
