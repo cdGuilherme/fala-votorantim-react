@@ -1,8 +1,12 @@
 import Header from '../../../Components/Header/Header';
+import Footer from "../../../Components/Footer/Footer";
 
 function LandingPage() {
     return(
-        <Header/>
+        <div>
+            <Header/>
+            <Footer/>
+        </div>
     )
 }
 
