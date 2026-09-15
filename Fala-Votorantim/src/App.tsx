@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
 
 
 // Páginas inicias
@@ -34,7 +34,7 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <MemoryRouter>
       <Routes>
 
         {/* Páginas iniciais */}
@@ -59,7 +59,7 @@ function App() {
         {/*em comum entre eles */}
         <Route path='/CadastroDenuncia' element={<CadastroDenuncias/>}/>
       </Routes>
-    </BrowserRouter>
+    </MemoryRouter>
   )
 }
 
