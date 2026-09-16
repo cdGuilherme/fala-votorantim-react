@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Hero() {
     return(
         <section className="bg-[#1447E6] relative h-[90vh] font-bold">
-            <div className=" text-white absolute top-1/2 -translate-y-[60%] left-1/2 -translate-x-1/2">
+            <div className=" text-white absolute top-[40vh] -translate-y-1/2 left-1/2 -translate-x-1/2">
                 <div className="flex flex-col gap-10 justify-center items-center max-w-[80vw] text-center">
                     <h1 className="text-5xl">Ajude a melhorar Votorantim</h1>
                     <p className="text-xl">Encontrou algum problema na cidade? Denuncie buracos, iluminação quebrada, lixo acumulado e outros problemas urbanos de forma rápida, segura e anônima.</p>
