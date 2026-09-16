@@ -58,6 +58,8 @@ function App() {
 
         {/*em comum entre eles */}
         <Route path='/CadastroDenuncia' element={<CadastroDenuncias/>}/>
+
+        
       </Routes>
     </MemoryRouter>
   )
