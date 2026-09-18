@@ -1,6 +1,11 @@
 function CadastroDenunciasUser()
 {
-    return(<></>)
+
+    return(
+        <main>
+            
+        </main>
+    )
 }
 
 export default CadastroDenunciasUser;

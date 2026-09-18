@@ -1,0 +1,233 @@
+@import './Variaveis.css';
+
+.containerRegistro
+{
+    position: relative;
+    width: calc(100% - 2rem);
+    max-width: 64rem;
+    height: 35rem;
+    margin: 2rem auto;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: var(--cor-branco);
+    border: 0.0625rem solid var(--borda-azul-claro);
+}
+
+.ladoFormulario
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    background: var(--cor-branco);
+}
+
+.ladoLogin
+{
+    left: 0;
+}
+
+.ladoCadastro
+{
+    right: 0;
+}
+
+.painelDeslizante
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cor-principal);
+    transition: transform 0.7s ease-in-out;
+}
+
+.painelNaEsquerda
+{
+    transform: translateX(0);
+}
+
+.painelNaDireita
+{
+    transform: translateX(100%);
+}
+
+.overlayTexto
+{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    box-sizing: border-box;
+    text-align: center;
+    color: var(--cor-branco);
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.overlayTexto h2
+{
+    margin: 0 0 0.75rem;
+    color: var(--cor-branco);
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.overlayTexto p
+{
+    max-width: 20rem;
+    margin: 0 0 1.75rem;
+    color: var(--cor-branco);
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+}
+
+.overlayVisivel
+{
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.overlayOculto
+{
+    opacity: 0;
+    transform: translateX(1.5rem);
+    pointer-events: none;
+}
+
+.btnTrocarModo
+{
+    min-width: 9rem;
+    padding: 0.7rem 2rem;
+    border: 0.125rem solid var(--cor-branco);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--cor-branco);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btnTrocarModo:hover
+{
+    background: var(--cor-branco);
+    color: var(--cor-principal);
+    transform: translateY(-0.125rem);
+}
+
+.btnTrocarModo:active
+{
+    transform: translateY(0);
+}
+
+@media (max-width: 48rem)
+{
+    .containerRegistro
+    {
+        width: calc(100% - 2rem);
+        height: 36rem;
+    }
+
+    .ladoFormulario
+    {
+        padding: 2rem;
+    }
+
+    .overlayTexto
+    {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 40rem)
+{
+    .containerRegistro
+    {
+        width: calc(100% - 1rem);
+        height: auto;
+        overflow: visible;
+        margin: 1rem auto;
+        background: transparent;
+        border: none;
+    }
+
+    .painelDeslizante
+    {
+        position: relative;
+        width: 100%;
+        height: 12rem;
+        min-height: 12rem;
+        transform: none !important;
+        border-radius: 1rem;
+    }
+
+    .ladoFormulario
+    {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 1rem;
+        padding: 2rem 1.5rem;
+        border-radius: 1rem;
+        background: var(--cor-branco);
+        border: 0.0625rem solid var(--borda-azul-claro);
+        box-sizing: border-box;
+    }
+
+    .modoLogin .ladoLogin
+    {
+        display: flex;
+    }
+
+    .modoLogin .ladoCadastro
+    {
+        display: none;
+    }
+
+    .modoCadastro .ladoLogin
+    {
+        display: none;
+    }
+
+    .modoCadastro .ladoCadastro
+    {
+        display: flex;
+    }
+
+    .overlayTexto
+    {
+        padding: 1.5rem;
+    }
+
+    .overlayTexto h2
+    {
+        font-size: 1.4rem;
+    }
+
+    .overlayTexto p
+    {
+        font-size: 0.875rem;
+    }
+}

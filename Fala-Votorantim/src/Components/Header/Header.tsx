@@ -4,8 +4,7 @@ const links = [
     {link:"/", label: "Início"},
     {link:"/Sobre", label: "Sobre nós"},
     {link:"/Feed", label: "Feed de denúncias"},
-    {link:"/Login", label: "Login"},
-    {link:"/Cadastrar", label: "Cadastrar"},
+    {link:"/Registro", label: "Acessar"},
 ]
 
 export default function Header() {

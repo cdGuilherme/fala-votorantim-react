@@ -1,17 +1,25 @@
 <?php
 
-    header('Content-type: application/json');
+    header("Access-Control-Allow-Origin: http://localhost:5173");
+    header("Content-Type: application/json; charset=UTF-8");
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
 
-    $FormatoJSON = file_get_contents('http://input');
+    require_once 'services/connection.php';
+
+    $FormatoJSON = file_get_contents('php://input');
     $dados = json_decode($FormatoJSON, true);
 
-    if(!$FormatoJSON)
+    if(!$dados)
         {
-            $erro = [
-                'Status' => 'Failed',
-                'Code'   => '404',
-                'Mensage'=> 'ERRO! Infelizmente não chegou no index.php'
-            ]
+            http_response_code(400);
 
-            echo json_encode($erro);
+            echo json_encode([
+            "status" => false,
+            "mensagem" => "Não foi possível ler os dados enviados."
+            ]);
+
+            exit;
         }
+
+    require_once __DIR__ . '/routes/api.php';

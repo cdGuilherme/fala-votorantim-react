@@ -1,6 +1,12 @@
+
+
 function CadastroDenunciasUser()
 {
-    return(<></>)
+    return(
+        <div>
+
+        </div>
+    )
 }
 
 export default CadastroDenunciasUser;
