@@ -9,7 +9,7 @@ const links = [
 
 export default function Header() {
     return(
-        <header className="w-full bg-linear-to-r from-[#1447E6] to-[#193CB8] min-w-full ">
+        <header className="w-full bg-linear-to-r from-[#1447E6] to-[#193CB8] min-w-full fixed top-0 left-0 z-9999">
             <div className="flex place-content-between h-[10vh] mx-5">
                 <div className="flex items-center gap-5">
                     <NavLink to={"/"}><img src="/Logo.png" alt="Logo do Fala Votorantim" className="w-[3.5vw] h-[3.5vw] rounded-[50%]" /></NavLink>

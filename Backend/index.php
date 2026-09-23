@@ -14,6 +14,7 @@
         {
             http_response_code(400);
 
+<<<<<<< Updated upstream
             echo json_encode([
             "status" => false,
             "mensagem" => "Não foi possível ler os dados enviados."
@@ -23,3 +24,9 @@
         }
 
     require_once __DIR__ . '/routes/api.php';
+=======
+            echo json_encode($erro);
+        }
+
+        
+>>>>>>> Stashed changes
