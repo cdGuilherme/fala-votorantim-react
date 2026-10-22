@@ -14,6 +14,11 @@ import Registro from './Pages/PaginaPrincipal/Registro/Registro'
 import TelaInicialADM from './Pages/PaginaADM/TelaInicial/TelaInicial'
 import DashboardADM from './Pages/PaginaADM/Dashboard/Dashboard'
 import FeedDenunciasADM from './Pages/PaginaADM/FeedDenuncias/FeedDenuncias'
+import CadastroDenunciasADM from './Pages/PaginaADM/CadastroDenuncia/CadastroDenuncia'
+import DenunciasPrioritarias from './Pages/PaginaADM/DenunciasPrioritarias/DenunciaPrioritaria'
+import RelatoriosEstatisticasADM from './Pages/PaginaADM/Relatorio/Relatorio'
+import UsuariosPermissoesADM from './Pages/PaginaADM/PermissaoUser/Permissao'
+import ConfiguracoesADM from './Pages/PaginaADM/configuracoes/config'
 
 
 {/* Users */}
@@ -43,11 +48,16 @@ function App() {
         <Route path='/Feed' element={<FeedDenuncia/>} />
         <Route path='/Registro' element={<Registro />}/>
 
-        {/*ADM */}
+        {/* ADM */}
 
         <Route path='/adm/TelaInicial' element={<TelaInicialADM/>}/>
         <Route path='/adm/Dashboard' element={<DashboardADM/>}/>
         <Route path='/adm/FeedDenuncias' element={<FeedDenunciasADM/>}/>
+        <Route path='/adm/CadastroDenuncias' element={<CadastroDenunciasADM/>}/>
+        <Route path='/adm/DenunciasPrioritarias' element={<DenunciasPrioritarias/>}/>
+        <Route path='/adm/RelatoriosEstatisticas' element={<RelatoriosEstatisticasADM/>}/>
+        <Route path='/adm/UsuariosPermissoes' element={<UsuariosPermissoesADM/>}/>
+        <Route path='/adm/Configuracoes' element={<ConfiguracoesADM/>}/>
         
         {/* Users */}
 
