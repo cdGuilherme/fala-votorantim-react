@@ -22,6 +22,7 @@ import TelaInicialUser from './Pages/PaginaUser/TelaInicialUser/TelaInicialUser'
 import MeusDados from './Pages/PaginaUser/MeusDados/MeusDados'
 import Notificacoes from './Pages/PaginaUser/Notificacoes/Notificacoes'
 import MinhasDenuncias from './Pages/PaginaUser/MinhasDenuncias/MinhasDenuncias'
+import FeedDenunciasUser from './Pages/PaginaUser/FeedDenuncias/FeedDenuncias'
 
 {/* em Comum entre eles */}
 
@@ -51,10 +52,11 @@ function App() {
         
         {/* Users */}
 
-        <Route path='/users/TeleInicial' element={<TelaInicialUser/>}/>
+        <Route path='/users/TelaInicial' element={<TelaInicialUser/>}/>
         <Route path='/users/MeusDados' element={<MeusDados />}/>
-        <Route path='/users/notificacoes' element={<Notificacoes/>}/>
+        <Route path='/users/Notificacoes' element={<Notificacoes/>}/>
         <Route path='/users/MinhasDenuncias' element={<MinhasDenuncias/>}/>
+        <Route path='/users/FeedDenuncias' element={<FeedDenunciasUser/>}/>
 
         {/*em comum entre eles */}
         <Route path='/CadastroDenuncia' element={<CadastroDenuncias/>}/>
