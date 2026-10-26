@@ -1,16 +1,16 @@
-function CadastroLogin()
-{
+// function CadastroLogin()
+// {
 
-    const dados = {
-        nome: nome,
+//     const dados = {
+//         nome: nome,
         
-    }
+//     }
 
 
-    function EnviarCadastro()
-    {
-        const [nome, setNome] = useState()
-        const [email, setEmail] = useState()
-        const [telefone, setTelefone] = useState();
-    }
-}
+//     function EnviarCadastro()
+//     {
+//         const [nome, setNome] = useState()
+//         const [email, setEmail] = useState()
+//         const [telefone, setTelefone] = useState();
+//     }
+// }
