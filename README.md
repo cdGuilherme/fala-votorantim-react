@@ -1,8 +1,8 @@
-# Fala Votorantim — React
+# Fala Votorantim React
 
 Projeto **Fala Votorantim**, desenvolvido com React, TypeScript, Vite e Tailwind CSS.
 
-🌐 **Acesse o site publicado:** [Fala Votorantim — GitHub Pages](https://cdGuilherme.github.io/fala-votorantim-react/)
+🌐 **Acesse o site publicado:** [Fala Votorantim GitHub Pages](https://cdGuilherme.github.io/fala-votorantim-react/)
 
 📦 **Repositório:** [fala-votorantim-react](https://github.com/cdGuilherme/fala-votorantim-react)
 
