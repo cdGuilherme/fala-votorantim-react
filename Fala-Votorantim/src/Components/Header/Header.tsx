@@ -17,7 +17,7 @@ export default function Header() {
 				{/* Logo */}
 				<NavLink to="/" className="shrink-0">
 					<img
-						src="/Logo.png"
+						src={`${import.meta.env.BASE_URL}Logo.png`}
 						alt="Logo do Fala Votorantim"
 						className="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12"
 					/>
