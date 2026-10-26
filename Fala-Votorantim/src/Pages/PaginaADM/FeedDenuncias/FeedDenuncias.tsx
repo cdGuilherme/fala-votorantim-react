@@ -1,7 +1,7 @@
-import MenuLateralADM from '../../../Components/Cards/menuLateral/MenuLateralADM.js';
+import FeedDenuncias from './../../../Layout/PaginaADM/FeedDenuncias/FeedDenuncias'
 
 export default function FeedDenunciasADM() {
     return (
-        <MenuLateralADM />
+        <FeedDenuncias />
     );
 }

@@ -8,6 +8,7 @@ import CardDenuncia from "./CardDenuncia";
 
 type ListaDenunciasProps = {
 	denuncias: Denuncia[];
+	quantidadeInicial?: number;
 };
 
 const ITENS_POR_PAGINA_PADRAO = 10;
@@ -86,11 +87,12 @@ function ControlesPaginacao({
 
 export default function ListaDenuncias({
 	denuncias,
+	quantidadeInicial = ITENS_POR_PAGINA_PADRAO,
 }: ListaDenunciasProps) {
 	const [paginaAtual, setPaginaAtual] = useState(1);
 
 	const [quantidadePorPagina, setQuantidadePorPagina] =
-		useState(String(ITENS_POR_PAGINA_PADRAO));
+		useState(String(quantidadeInicial));
 
 	const itensPorPagina = useMemo(() => {
 		const quantidade = Number(quantidadePorPagina);
