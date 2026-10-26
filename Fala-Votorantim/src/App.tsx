@@ -1,5 +1,5 @@
 import './App.css'
-import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 // Páginas inicias
@@ -34,7 +34,7 @@ function App() {
 
 
   return (
-    <MemoryRouter>
+    <BrowserRouter>
       <Routes>
 
         {/* Páginas iniciais */}
@@ -61,7 +61,7 @@ function App() {
 
         
       </Routes>
-    </MemoryRouter>
+    </BrowserRouter>
   )
 }
 
