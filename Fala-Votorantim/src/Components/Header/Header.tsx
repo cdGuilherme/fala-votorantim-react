@@ -1,4 +1,5 @@
 import {NavLink} from "react-router-dom";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const links = [
     {link:"/", label: "Início"},
@@ -10,11 +11,14 @@ const links = [
 export default function Header() {
     return(
         <header className="w-[100vw] bg-linear-to-r from-[#1447E6] to-[#193CB8] absolute top-0 z-999 ">
-            <div className="flex place-content-between h-[10vh] mx-5">
+            <div className="flex place-content-between items-center p-2 mx-5 h-[10vh]
+                            md:place-content-evenly
+                            lg:place-content-between">
                 <div className="flex items-center gap-5">
-                    <NavLink to={"/"}><img src="/Logo.png" alt="Logo do Fala Votorantim" className="w-[3.5vw] h-[3.5vw] rounded-[50%]" /></NavLink>
+                    <NavLink to={"/"}><img src="/Logo.png" alt="Logo do Fala Votorantim" 
+                    className="w-15 h-15 rounded-[50%]" /></NavLink>
                     <h1 className="text-white hidden
-                                    md:inline-block">Fala Votorantim</h1>
+                                    lg:inline-block">Fala Votorantim</h1>
                 </div>
                 <div className="hidden
                                 md:block md:flex md:items-center md:gap-8">
@@ -33,7 +37,7 @@ export default function Header() {
                         )
                     })}
                 </div>
-                <div className="md:hidden">Hamburguer</div>
+                <div className="md:hidden"><RxHamburgerMenu size={40} className="text-white"/></div>
             </div>
         </header>
     )
