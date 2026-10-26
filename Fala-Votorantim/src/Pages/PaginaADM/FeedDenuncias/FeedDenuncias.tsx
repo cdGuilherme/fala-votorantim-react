@@ -10,7 +10,7 @@ import type { Denuncia, Status } from "../../../Layout/FeedDenuncias/types";
 
 export default function FeedDenunciasADM() {
 	// Hoje, a página administrativa inicializa os dados assim:
-  const [denuncias] = useState<Denuncia[]>(denunciasIniciais);
+	const [denuncias] = useState<Denuncia[]>(denunciasIniciais);
 	// Isso é adequado para os dados de demonstração. Mas, quando houver backend, será necessário carregar os dados de forma assíncrona,
 	// tratando estados como carregamento, erro e lista vazia.
 	// Uma futura organização poderia ser:
@@ -28,87 +28,132 @@ export default function FeedDenunciasADM() {
 	// 		├── PaginaADM/
 	// 		└── PaginaUser/
 
-  const [busca, setBusca] = useState("");
-  const [mostrarFiltros, setMostrarFiltros] = useState(false);
+	const [busca, setBusca] = useState("");
+	const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
-  const [categoriasSelecionadas, setCategoriasSelecionadas] =
-    useState<string[]>([]);
+	const [categoriasSelecionadas, setCategoriasSelecionadas] =
+		useState<string[]>([]);
 
-  const [statusSelecionados, setStatusSelecionados] =
-    useState<Status[]>([]);
+	const [statusSelecionados, setStatusSelecionados] =
+		useState<Status[]>([]);
 
-  const filtradas = useMemo(() => {
-    return denuncias.filter((denuncia) => {
-      const termo = busca.toLowerCase().trim();
+	const [dataInicial, setDataInicial] = useState("");
+	const [dataFinal, setDataFinal] = useState("");
 
-      const correspondeBusca =
-        !termo ||
-        denuncia.titulo.toLowerCase().includes(termo) ||
-        denuncia.id.toLowerCase().includes(termo) ||
-        denuncia.descricao.toLowerCase().includes(termo) ||
-        denuncia.endereco.toLowerCase().includes(termo);
+	const [ordemData, setOrdemData] = useState<"recentes" | "antigas">("recentes");
 
-      const correspondeCategoria =
-        categoriasSelecionadas.length === 0 ||
-        categoriasSelecionadas.includes(denuncia.categoria);
 
-      const correspondeStatus =
-        statusSelecionados.length === 0 ||
-        statusSelecionados.includes(denuncia.status);
+	const filtradas = useMemo(() => {
+		const termo = busca.toLowerCase().trim();
 
-      return (
-        correspondeBusca &&
-        correspondeCategoria &&
-        correspondeStatus
-      );
-    });
-  }, [
-    denuncias,
-    busca,
-    categoriasSelecionadas,
-    statusSelecionados,
-  ]);
+		function converterData(data: string): number {
+			// Converte "DD/MM/AAAA, HH:mm" para um timestamp.
+			const [dataParte, horaParte = "00:00"] = data.split(", ");
+			const [dia, mes, ano] = dataParte.split("/").map(Number);
+			const [hora, minuto] = horaParte.split(":").map(Number);
 
-  function limparFiltros() {
-    setBusca("");
-    setCategoriasSelecionadas([]);
-    setStatusSelecionados([]);
-  }
+			return new Date(ano, mes - 1, dia, hora, minuto).getTime();
+		}
 
-  return (
-    <main className="min-h-screen bg-[#EFF6FF] px-4 py-8 sm:px-8 lg:px-[8vw]">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-5">
+		const resultado = denuncias.filter((denuncia) => {
+			const correspondeBusca =
+				!termo ||
+				denuncia.titulo.toLowerCase().includes(termo) ||
+				denuncia.id.toLowerCase().includes(termo) ||
+				denuncia.descricao.toLowerCase().includes(termo) ||
+				denuncia.endereco.toLowerCase().includes(termo);
 
-        {/* Cabeçalho exclusivo do administrador */}
-        <header className="flex flex-col gap-1">
-          <h1 className="text-3xl font-bold text-[#1E2939]">
-            Admin
-          </h1>
+			const correspondeCategoria =
+				categoriasSelecionadas.length === 0 ||
+				categoriasSelecionadas.includes(denuncia.categoria);
 
-          <p className="pl-1 text-base text-[#6A7282]">
-            Feed de Denúncias
-          </p>
-        </header>
+			const correspondeStatus =
+				statusSelecionados.length === 0 ||
+				statusSelecionados.includes(denuncia.status);
 
-        {/* Componentes compartilhados */}
-        <ResumoDenuncias denuncias={denuncias} />
+			const partesData = denuncia.data.split(",")[0].split("/");
+			const dataDenuncia =
+				partesData.length === 3
+					? `${partesData[2]}-${partesData[1]}-${partesData[0]}`
+					: "";
 
-        <FiltrosDenuncias
-          busca={busca}
-          onBuscaChange={setBusca}
-          mostrarFiltros={mostrarFiltros}
-          onToggleFiltros={() =>
-            setMostrarFiltros((atual) => !atual)
-          }
-          categoriasSelecionadas={categoriasSelecionadas}
-          onCategoriasChange={setCategoriasSelecionadas}
-          statusSelecionados={statusSelecionados}
-          onStatusChange={setStatusSelecionados}
-          onLimparFiltros={limparFiltros}
-        />
+			const correspondeData =
+				(!dataInicial ||
+					(dataDenuncia !== "" && dataDenuncia >= dataInicial)) &&
+				(!dataFinal ||
+					(dataDenuncia !== "" && dataDenuncia <= dataFinal));
 
-        <ListaDenuncias denuncias={filtradas} />
-      </div>
-    </main>
-  );
+			return (
+				correspondeBusca &&
+				correspondeCategoria &&
+				correspondeStatus &&
+				correspondeData
+			);
+		});
+
+		return resultado.sort((a, b) => {
+			const diferenca = converterData(a.data) - converterData(b.data);
+
+			return ordemData === "recentes" ? -diferenca : diferenca;
+		});
+	}, [
+		denuncias,
+		busca,
+		categoriasSelecionadas,
+		statusSelecionados,
+		dataInicial,
+		dataFinal,
+		ordemData,
+	]);
+
+	function limparFiltros() {
+		setBusca("");
+		setCategoriasSelecionadas([]);
+		setStatusSelecionados([]);
+		setDataInicial("");
+		setDataFinal("");
+	}
+
+	return (
+		<main className="min-h-screen bg-[#EFF6FF] px-4 py-8 sm:px-8 lg:px-[8vw]">
+			<div className="mx-auto flex w-full max-w-5xl flex-col gap-5">
+
+				{/* Cabeçalho exclusivo do administrador */}
+				<header className="flex flex-col gap-1">
+					<h1 className="text-3xl font-bold text-[#1E2939]">
+						Admin
+					</h1>
+
+					<p className="pl-1 text-base text-[#6A7282]">
+						Feed de Denúncias
+					</p>
+				</header>
+
+				{/* Componentes compartilhados */}
+				<ResumoDenuncias denuncias={denuncias} />
+
+				<FiltrosDenuncias
+					busca={busca}
+					onBuscaChange={setBusca}
+					mostrarFiltros={mostrarFiltros}
+					onToggleFiltros={() =>
+						setMostrarFiltros((atual) => !atual)
+					}
+					categoriasSelecionadas={categoriasSelecionadas}
+					onCategoriasChange={setCategoriasSelecionadas}
+					statusSelecionados={statusSelecionados}
+					onStatusChange={setStatusSelecionados}
+					onLimparFiltros={limparFiltros}
+					dataInicial={dataInicial}
+					onDataInicialChange={setDataInicial}
+					dataFinal={dataFinal}
+					onDataFinalChange={setDataFinal}
+					ordemData={ordemData}
+					onOrdemDataChange={setOrdemData}
+				/>
+
+				<ListaDenuncias denuncias={filtradas} />
+			</div>
+		</main>
+	);
 }
