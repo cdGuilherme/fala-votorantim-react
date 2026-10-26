@@ -35,7 +35,7 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/fala-votorantim-react">
       <Routes>
 
         {/* Páginas iniciais */}
