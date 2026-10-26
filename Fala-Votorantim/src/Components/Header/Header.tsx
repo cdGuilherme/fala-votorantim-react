@@ -1,40 +1,53 @@
-import {NavLink} from "react-router-dom";
+
+import { NavLink } from "react-router-dom";
 
 const links = [
-    {link:"/", label: "Início"},
-    {link:"/Sobre", label: "Sobre nós"},
-    {link:"/Feed", label: "Feed de denúncias"},
-    {link:"/Registro", label: "Acessar"},
-]
+	{ link: "/", label: "Início" },
+	{ link: "/Sobre", label: "Sobre nós" },
+	{ link: "/Feed", label: "Feed de denúncias" },
+	{ link: "/Registro", label: "Acessar" },
+];
 
 export default function Header() {
-    return(
-        <header className="w-[100vw] bg-linear-to-r from-[#1447E6] to-[#193CB8] absolute top-0 z-999 ">
-            <div className="flex place-content-between h-[10vh] mx-5">
-                <div className="flex items-center gap-5">
-                    <NavLink to={"/"}><img src="/Logo.png" alt="Logo do Fala Votorantim" className="w-[3.5vw] h-[3.5vw] rounded-[50%]" /></NavLink>
-                    <h1 className="text-white hidden
-                                    md:inline-block">Fala Votorantim</h1>
-                </div>
-                <div className="hidden
-                                md:block md:flex md:items-center md:gap-8">
-                    {links.map((dado) => {
-                        return(
-                            <NavLink to={dado.link}
-                            end={dado.link === "/"}
-                            className={({isActive}) => {
-                                return isActive ?
-                                "flex h-10 items-center justify-center bg-[#155DFC] p-5 rounded-md text-white" :
-                                "flex h-10 items-center justify-center bg-[#1447E6] p-5 rounded-md text-white"
-                            }}
-                            key={dado.link}>
-                                {dado.label}
-                            </NavLink>
-                        )
-                    })}
-                </div>
-                <div className="md:hidden">Hamburguer</div>
-            </div>
-        </header>
-    )
+	return (
+		<header className="relative z-50 w-full bg-linear-to-r from-[#1447E6] to-[#193CB8]">
+			<div className="mx-5 flex min-h-[10vh] items-center justify-between">
+				<div className="flex items-center gap-5">
+					<NavLink to="/">
+						<img
+							src="/Logo.png"
+							alt="Logo do Fala Votorantim"
+							className="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12"
+						/>
+					</NavLink>
+
+					<h1 className="hidden text-white md:inline-block">
+						Fala Votorantim
+					</h1>
+				</div>
+
+				<nav className="hidden items-center gap-4 md:flex lg:gap-8">
+					{links.map((dado) => (
+						<NavLink
+							to={dado.link}
+							end={dado.link === "/"}
+							className={({ isActive }) =>
+								`flex h-10 items-center justify-center rounded-md px-4 text-white transition ${isActive
+									? "bg-[#155DFC]"
+									: "bg-[#1447E6] hover:bg-[#155DFC]"
+								}`
+							}
+							key={dado.link}
+						>
+							{dado.label}
+						</NavLink>
+					))}
+				</nav>
+
+				<div className="md:hidden text-white">
+					Hamburguer
+				</div>
+			</div>
+		</header>
+	);
 }
