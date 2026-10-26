@@ -27,17 +27,13 @@ import TelaInicialUser from './Pages/PaginaUser/TelaInicialUser/TelaInicialUser'
 import MeusDados from './Pages/PaginaUser/MeusDados/MeusDados'
 import Notificacoes from './Pages/PaginaUser/Notificacoes/Notificacoes'
 import MinhasDenuncias from './Pages/PaginaUser/MinhasDenuncias/MinhasDenuncias'
+import FeedDenunciasUser from './Pages/PaginaUser/FeedDenuncias/FeedDenuncias'
 
 {/* em Comum entre eles */}
 
 import CadastroDenuncias from './Pages/CadastroDenuncias/CadastroDenunciasUser'
 
-
-
-
-function App() {
-
-
+export default function App() {
   return (
     <MemoryRouter>
       <Routes>
@@ -65,6 +61,7 @@ function App() {
         <Route path='/users/MeusDados' element={<MeusDados />}/>
         <Route path='/users/notificacoes' element={<Notificacoes/>}/>
         <Route path='/users/MinhasDenuncias' element={<MinhasDenuncias/>}/>
+        <Route path='/users/FeedDenunciasUser' element={<FeedDenunciasUser/>}/>
 
         {/*em comum entre eles */}
         <Route path='/CadastroDenuncia' element={<CadastroDenuncias/>}/>
@@ -74,5 +71,3 @@ function App() {
     </MemoryRouter>
   )
 }
-
-export default App
