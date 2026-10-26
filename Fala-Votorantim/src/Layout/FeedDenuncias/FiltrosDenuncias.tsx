@@ -140,68 +140,56 @@ export default function FiltrosDenuncias({
 			{mostrarFiltros && (
 				<div className="flex flex-col gap-5">
 
-					{/* Ordenação por data */}
-					<div className="flex flex-col gap-2">
-						<label
-							htmlFor="ordem-data"
-							className="text-sm font-medium text-[#364152]"
-						>
-							Ordenar por data
+					{/* Ordenação e período */}
+					<div className="grid grid-cols-1 items-end gap-4 md:grid-cols-3">
+						{/* Ordenação por data */}
+						<div className="flex flex-col gap-2">
+							<label
+								htmlFor="ordem-data"
+								className="text-sm font-medium text-[#364152]"
+							>
+								Ordenar por data
+							</label>
+
+							<select
+								id="ordem-data"
+								value={ordemData}
+								onChange={(e) =>
+									onOrdemDataChange(
+										e.target.value as "recentes" | "antigas"
+									)
+								}
+								className="h-10 w-full rounded-lg border border-[#A0AEC0] bg-white px-3 text-sm text-[#1E2939] outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
+							>
+								<option value="recentes">Mais recentes primeiro</option>
+								<option value="antigas">Mais antigas primeiro</option>
+							</select>
+						</div>
+
+						{/* Data inicial */}
+						<label className="flex flex-col gap-2 text-sm font-medium text-[#364152]">
+							Data inicial
+							<input
+								type="date"
+								value={dataInicial}
+								max={dataFinal || undefined}
+								onChange={(e) => onDataInicialChange(e.target.value)}
+								className="h-10 w-full rounded-lg border border-[#A0AEC0] bg-white px-3 text-sm outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
+							/>
 						</label>
 
-						<select
-							id="ordem-data"
-							value={ordemData}
-							onChange={(e) =>
-								onOrdemDataChange(
-									e.target.value as "recentes" | "antigas"
-								)
-							}
-							className="w-full rounded-lg border border-[#A0AEC0] bg-white px-3 py-2 text-sm text-[#1E2939] outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100 sm:max-w-xs"
-						>
-							<option value="recentes">
-								Mais recentes primeiro
-							</option>
-							<option value="antigas">
-								Mais antigas primeiro
-							</option>
-						</select>
+						{/* Data final */}
+						<label className="flex flex-col gap-2 text-sm font-medium text-[#364152]">
+							Data final
+							<input
+								type="date"
+								value={dataFinal}
+								min={dataInicial || undefined}
+								onChange={(e) => onDataFinalChange(e.target.value)}
+								className="h-10 w-full rounded-lg border border-[#A0AEC0] bg-white px-3 text-sm outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
+							/>
+						</label>
 					</div>
-
-					{/* Período */}
-					<fieldset className="rounded-xl border border-[#D0D5DD] p-4">
-						<legend className="px-2 text-base font-semibold text-[#1E2939]">
-							Período da denúncia
-						</legend>
-
-						<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-							<label className="flex flex-col gap-2 text-sm font-medium text-[#364152]">
-								Data inicial
-								<input
-									type="date"
-									value={dataInicial}
-									max={dataFinal || undefined}
-									onChange={(e) =>
-										onDataInicialChange(e.target.value)
-									}
-									className="w-full rounded-lg border border-[#A0AEC0] bg-white px-3 py-2 text-sm outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
-								/>
-							</label>
-
-							<label className="flex flex-col gap-2 text-sm font-medium text-[#364152]">
-								Data final
-								<input
-									type="date"
-									value={dataFinal}
-									min={dataInicial || undefined}
-									onChange={(e) =>
-										onDataFinalChange(e.target.value)
-									}
-									className="w-full rounded-lg border border-[#A0AEC0] bg-white px-3 py-2 text-sm outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
-								/>
-							</label>
-						</div>
-					</fieldset>
 
 					<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 						{/* Categorias */}
