@@ -1,3 +1,4 @@
+
 name: Publicar no GitHub Pages
 
 on:
@@ -17,6 +18,11 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./Fala-Votorantim
+
     steps:
       - name: Baixar código
         uses: actions/checkout@v4
@@ -26,6 +32,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: Fala-Votorantim/package-lock.json
 
       - name: Instalar dependências
         run: npm ci
@@ -39,7 +46,7 @@ jobs:
       - name: Preparar arquivos
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./Fala-Votorantim/dist
 
       - name: Publicar site
         uses: actions/deploy-pages@v4
