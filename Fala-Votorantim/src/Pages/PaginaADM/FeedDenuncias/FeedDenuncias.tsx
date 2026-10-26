@@ -9,7 +9,24 @@ import { denunciasIniciais } from "../../../Layout/FeedDenuncias/dadosDenuncias"
 import type { Denuncia, Status } from "../../../Layout/FeedDenuncias/types";
 
 export default function FeedDenunciasADM() {
+	// Hoje, a página administrativa inicializa os dados assim:
   const [denuncias] = useState<Denuncia[]>(denunciasIniciais);
+	// Isso é adequado para os dados de demonstração. Mas, quando houver backend, será necessário carregar os dados de forma assíncrona,
+	// tratando estados como carregamento, erro e lista vazia.
+	// Uma futura organização poderia ser:
+	// src/
+	// ├── Layout/
+	// │   └── FeedDenuncias/
+	// │       ├── CardDenuncia.tsx
+	// │       ├── ListaDenuncias.tsx
+	// │       ├── ResumoDenuncias.tsx
+	// │       ├── FiltrosDenuncias.tsx
+	// │       └── types.ts
+	// ├── services/
+	// │   └── denunciasService.ts
+	// └── Pages/
+	// 		├── PaginaADM/
+	// 		└── PaginaUser/
 
   const [busca, setBusca] = useState("");
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
