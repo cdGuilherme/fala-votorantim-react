@@ -26,7 +26,7 @@ export default function Footer() {
                 <h1 className="text-[#E9F0FF] font-bold mb-5">Páginas</h1>
                 {lista.map((dado) => {
                     return(
-                        <NavLink to={dado.link}
+                        <NavLink to={dado.link} key={dado.link}
                         className={"text-[#99A1AF]"}>
                             {dado.label}
                         </NavLink>
