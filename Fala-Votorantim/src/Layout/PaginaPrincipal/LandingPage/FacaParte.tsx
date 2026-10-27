@@ -2,20 +2,24 @@ import { NavLink } from "react-router-dom";
 
 function FacaParte() {
     return (
-        <section className="bg-white px-[10vw] py-16 flex flex-col items-center gap-4">
-            <h2 className="text-3xl font-bold text-[#1E2939] text-center">Faça parte da mudança</h2>
+        <section className="bg-white px-6 py-24">
+            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-[#1E2939] px-8 py-16 text-center md:px-16">
+                <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#1447E6]/40 blur-3xl" />
+                <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-[#155DFC]/30 blur-3xl" />
 
-            <div className="flex flex-col gap-2 w-full max-w-[60vw]">
-                <p className="text-[#4A5565]">Não ignore os problemas da cidade.</p>
-                <p className="text-[#4A5565]">Denuncie, participe e ajude a construir uma Votorantim melhor para todos.</p>
+                <div className="relative flex flex-col items-center gap-5">
+                    <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Faça parte da mudança</h2>
+                    <p className="max-w-xl text-[#99A1AF]">
+                        Não ignore os problemas da cidade. Denuncie, participe e ajude a construir uma Votorantim melhor para todos.
+                    </p>
+                    <NavLink
+                        to="/Registro"
+                        className="mt-3 rounded-lg bg-[#1447E6] px-8 py-3.5 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#155DFC]"
+                    >
+                        Começar agora
+                    </NavLink>
+                </div>
             </div>
-
-            <NavLink
-                to="/Registro"
-                className="bg-[#1447E6] text-white rounded-md h-12 w-full max-w-[60vw] mt-2 flex justify-center items-center"
-            >
-                Começar agora
-            </NavLink>
         </section>
     )
 }
