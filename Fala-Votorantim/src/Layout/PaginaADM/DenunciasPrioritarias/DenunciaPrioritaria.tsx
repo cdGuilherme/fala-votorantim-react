@@ -1,146 +1,40 @@
 
-import { useMemo, useState } from "react";
-
-import MenuLateralADM from "../../../Components/Cards/menuLateral/MenuLateralADM";
-
-import { denunciasIniciais } from "../../../Layout/FeedDenuncias/dadosDenuncias";
-
-import type {
-    Denuncia,
-    Status,
-} from "../../../Layout/FeedDenuncias/types";
-
-type DenunciaPrioritaria = Denuncia & {
-    prioritaria?: boolean;
-    prioridade?: string | boolean;
-    periculosidade?: string | boolean;
-    nivelPericulosidade?: string;
-};
-
-function verificarPrioridade(denuncia: DenunciaPrioritaria): boolean {
-    const prioridade = String(denuncia.prioridade ?? "").toLowerCase().trim();
-    const periculosidade = String(
-        denuncia.periculosidade ?? ""
-    ).toLowerCase().trim();
-    const nivel = String(
-        denuncia.nivelPericulosidade ?? ""
-    ).toLowerCase().trim();
-
-    const valoresPrioritarios = [
-        "alta",
-        "alto",
-        "urgente",
-        "critica",
-        "crítica",
-        "prioritaria",
-        "prioritária",
-        "muito alta",
-    ];
-
-    return (
-        denuncia.prioritaria === true ||
-        denuncia.prioridade === true ||
-        denuncia.periculosidade === true ||
-        valoresPrioritarios.includes(prioridade) ||
-        valoresPrioritarios.includes(periculosidade) ||
-        valoresPrioritarios.includes(nivel)
-    );
-}
-
-function converterData(data: string): number {
-    const [dataParte, horaParte = "00:00"] = data.split(", ");
-    const [dia, mes, ano] = dataParte.split("/").map(Number);
-    const [hora, minuto] = horaParte.split(":").map(Number);
-
-    const timestamp = new Date(
-        ano,
-        mes - 1,
-        dia,
-        hora,
-        minuto
-    ).getTime();
-
-    return Number.isNaN(timestamp) ? 0 : timestamp;
-}
+import NavegacaoADM from "../NavegacaoADM";
+import useDenunciasPrioritarias from "../../../hooks/Denuncias/useDenunciasPrioritarias";
 
 export default function DenunciasPrioritarias() {
-    const denuncias = denunciasIniciais as DenunciaPrioritaria[];
-
-    const [busca, setBusca] = useState("");
-    const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
-    const [statusSelecionado, setStatusSelecionado] = useState("");
-    const [ordemData, setOrdemData] = useState<"recentes" | "antigas">(
-        "recentes"
-    );
-
-    const prioritarias = useMemo(() => {
-        return denuncias.filter(verificarPrioridade);
-    }, [denuncias]);
-
-    const categorias = useMemo(() => {
-        return [...new Set(prioritarias.map((denuncia) => denuncia.categoria))]
-            .filter(Boolean)
-            .sort();
-    }, [prioritarias]);
-
-    const statusDisponiveis = useMemo(() => {
-        return [...new Set(prioritarias.map((denuncia) => denuncia.status))]
-            .filter(Boolean);
-    }, [prioritarias]);
-
-    const filtradas = useMemo(() => {
-        const termo = busca.toLowerCase().trim();
-
-        return prioritarias
-            .filter((denuncia) => {
-                const correspondeBusca =
-                    !termo ||
-                    denuncia.id.toLowerCase().includes(termo) ||
-                    denuncia.titulo.toLowerCase().includes(termo) ||
-                    denuncia.descricao.toLowerCase().includes(termo) ||
-                    denuncia.endereco.toLowerCase().includes(termo);
-
-                const correspondeCategoria =
-                    !categoriaSelecionada ||
-                    denuncia.categoria === categoriaSelecionada;
-
-                const correspondeStatus =
-                    !statusSelecionado ||
-                    denuncia.status === statusSelecionado;
-
-                return (
-                    correspondeBusca &&
-                    correspondeCategoria &&
-                    correspondeStatus
-                );
-            })
-            .sort((a, b) => {
-                const diferenca =
-                    converterData(a.data) - converterData(b.data);
-
-                return ordemData === "recentes" ? -diferenca : diferenca;
-            });
-    }, [
+    const {
         prioritarias,
+        filtradas,
+        categorias,
+        statusDisponiveis,
+        mensagemErro,
         busca,
+        setBusca,
         categoriaSelecionada,
+        setCategoriaSelecionada,
         statusSelecionado,
+        setStatusSelecionado,
         ordemData,
-    ]);
-
-    function limparFiltros() {
-        setBusca("");
-        setCategoriaSelecionada("");
-        setStatusSelecionado("");
-        setOrdemData("recentes");
-    }
+        setOrdemData,
+        limparFiltros,
+        normalizarStatus,
+    } = useDenunciasPrioritarias();
 
     return (
         <div className="flex min-h-screen bg-[#EFF6FF]">
-            <MenuLateralADM />
+            <NavegacaoADM />
 
-            <main className="min-w-0 flex-1 px-4 pb-8 pt-20 sm:px-6 md:pt-6 lg:px-8">
+            <main className="min-w-0 flex-1 px-4 pb-8 pt-20 sm:px-6 lg:ml-64 lg:pt-6 lg:px-8">
                 <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
+                    {mensagemErro && (
+                        <p
+                            role="status"
+                            className="rounded-lg bg-amber-50 p-3 text-sm text-amber-800"
+                        >
+                            {mensagemErro}
+                        </p>
+                    )}
                     <header>
                         <p className="text-sm font-medium text-[#A65F00]">
                             Administração
@@ -398,27 +292,4 @@ export default function DenunciasPrioritarias() {
             </main>
         </div>
     );
-}
-
-// get: agrupa os status usados nos indicadores
-function normalizarStatus(status: Status): string {
-    const valor = String(status)
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim();
-
-    if (valor.includes("pendente") || valor.includes("aguardando")) {
-        return "pendente";
-    }
-
-    if (
-        valor.includes("andamento") ||
-        valor.includes("analise") ||
-        valor.includes("encaminhad")
-    ) {
-        return "andamento";
-    }
-
-    return valor;
 }

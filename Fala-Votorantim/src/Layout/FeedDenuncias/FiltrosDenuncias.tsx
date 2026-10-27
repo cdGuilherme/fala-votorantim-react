@@ -15,10 +15,10 @@ type FiltrosDenunciasProps = {
 	onToggleFiltros: () => void;
 
 	categoriasSelecionadas: string[];
-	onCategoriasChange: (categorias: string[]) => void;
+	onAlternarCategoria: (categoria: string, selecionada: boolean) => void;
 
 	statusSelecionados: Status[];
-	onStatusChange: (status: Status[]) => void;
+	onAlternarStatus: (status: Status, selecionado: boolean) => void;
 
 	dataInicial: string;
 	onDataInicialChange: (data: string) => void;
@@ -38,9 +38,9 @@ export default function FiltrosDenuncias({
 	mostrarFiltros,
 	onToggleFiltros,
 	categoriasSelecionadas,
-	onCategoriasChange,
+	onAlternarCategoria,
 	statusSelecionados,
-	onStatusChange,
+	onAlternarStatus,
 	dataInicial,
 	onDataInicialChange,
 	dataFinal,
@@ -49,39 +49,6 @@ export default function FiltrosDenuncias({
 	ordemData,
 	onOrdemDataChange,
 }: FiltrosDenunciasProps) {
-	function alternarCategoria(
-		categoria: string,
-		selecionada: boolean
-	) {
-		if (selecionada) {
-			onCategoriasChange([
-				...categoriasSelecionadas,
-				categoria,
-			]);
-		} else {
-			onCategoriasChange(
-				categoriasSelecionadas.filter(
-					(item) => item !== categoria
-				)
-			);
-		}
-	}
-
-	function alternarStatus(
-		status: Status,
-		selecionado: boolean
-	) {
-		if (selecionado) {
-			onStatusChange([...statusSelecionados, status]);
-		} else {
-			onStatusChange(
-				statusSelecionados.filter(
-					(item) => item !== status
-				)
-			);
-		}
-	}
-
 	return (
 		<section className="flex flex-col gap-3 rounded-xl border border-[#A0AEC0] bg-white p-4">
 			<h2 className="text-lg font-semibold text-[#1E2939]">
@@ -215,7 +182,7 @@ export default function FiltrosDenuncias({
 														type="checkbox"
 														checked={categoriasSelecionadas.includes(item)}
 														onChange={(e) =>
-															alternarCategoria(
+															onAlternarCategoria(
 																item,
 																e.target.checked
 															)
@@ -247,7 +214,7 @@ export default function FiltrosDenuncias({
 											type="checkbox"
 											checked={statusSelecionados.includes(item)}
 											onChange={(e) =>
-												alternarStatus(item, e.target.checked)
+												onAlternarStatus(item, e.target.checked)
 											}
 											className="accent-[#1447E6]"
 										/>

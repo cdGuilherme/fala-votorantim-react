@@ -1,12 +1,5 @@
+import CadastroDenunciasUser from "../../Layout/CadastroDenuncias/CadastroDenunciasUser";
 
-
-function CadastroDenunciasUser()
-{
-    return(
-        <div>
-
-        </div>
-    )
+export default function CadastroDenunciasUserPage() {
+    return <CadastroDenunciasUser />;
 }
-
-export default CadastroDenunciasUser;

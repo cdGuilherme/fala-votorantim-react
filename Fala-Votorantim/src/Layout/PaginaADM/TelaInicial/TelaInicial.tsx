@@ -1,11 +1,14 @@
-import Menu from '../../../Components/Cards/menuLateral/MenuLateralADM'
+import NavegacaoADM from '../NavegacaoADM'
+import useSessao from '../../../hooks/useSessao'
 
 export default function TelaInicialADM() {
+    const { sessao, mensagemErro } = useSessao()
+
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <Menu />
+            <NavegacaoADM />
 
-            <main className="min-w-0 flex-1 p-4 pt-20 sm:p-6 md:pt-6 lg:p-8">
+            <main className="min-w-0 flex-1 p-4 pt-20 sm:p-6 lg:ml-64 lg:pt-6 lg:p-8">
                 <header className="mb-8">
                     <h1 className="text-2xl font-bold text-gray-800">
                         Administração
@@ -18,12 +21,17 @@ export default function TelaInicialADM() {
                     
                     <div className="mt-5 rounded-xl bg-white p-5 shadow-sm">
                         <h2 className="text-xl font-semibold text-gray-800">
-                            Bem-vindo ao Fala Votorantim Sr.
+                            Bem-vindo ao Fala Votorantim
                         </h2>
 
                         <p className="text-gray-500">
-                            cargo:
+                            Secretaria: {sessao?.secretaria ?? "não identificada"}
                         </p>
+                        {mensagemErro && (
+                            <p role="status" className="mt-2 text-sm text-amber-700">
+                                {mensagemErro}
+                            </p>
+                        )}
                     </div>
                 </header>
 

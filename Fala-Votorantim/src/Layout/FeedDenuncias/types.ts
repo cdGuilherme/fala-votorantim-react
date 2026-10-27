@@ -10,6 +10,13 @@ export type Denuncia = {
   endereco: string;
   data: string;
   status: Status;
+  cep?: string;
+  numero?: string;
+  complemento?: string;
+  bairro?: string;
+  resultadoEsperado?: string;
+  anexoNome?: string;
+  anexoDataUrl?: string;
 };
 
 export type GrupoCategoria = {

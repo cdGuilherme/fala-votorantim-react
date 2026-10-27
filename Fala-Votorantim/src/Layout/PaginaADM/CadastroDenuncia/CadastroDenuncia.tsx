@@ -1,12 +1,25 @@
 
-import Menu from '../../../Components/Cards/menuLateral/MenuLateralADM'
+import NavegacaoADM from '../NavegacaoADM'
+import useCadastroDenuncia from '../../../hooks/Denuncias/useCadastroDenuncia'
 
 export default function CadastroDenuncia() {
+    const {
+        campos,
+        arquivo,
+        mensagem,
+        mensagemSucesso,
+        chaveInputArquivo,
+        atualizarCampo,
+        selecionarArquivo,
+        limparFormulario,
+        cadastrarDenuncia,
+    } = useCadastroDenuncia()
+
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <Menu />
+            <NavegacaoADM />
 
-            <main className="min-w-0 flex-1 p-4 pt-20 sm:p-6 md:pt-6 lg:p-8">
+            <main className="min-w-0 flex-1 px-4 pb-8 pt-20 sm:px-6 lg:ml-64 lg:px-8 lg:pt-8">
 
                 {/* Só mostrando em que parte ele está acessando */}
                 <header className="mb-6">
@@ -50,6 +63,9 @@ export default function CadastroDenuncia() {
                                 <input
                                     id="cep"
                                     type="text"
+                                    value={campos.cep}
+                                    onChange={(evento) => atualizarCampo("cep", evento.target.value)}
+                                    required
                                     placeholder="00000-000"
                                     className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                                 />
@@ -63,6 +79,9 @@ export default function CadastroDenuncia() {
                                 <input
                                     id="numero"
                                     type="text"
+                                    value={campos.numero}
+                                    onChange={(evento) => atualizarCampo("numero", evento.target.value)}
+                                    required
                                     placeholder="Número do local"
                                     className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                                 />
@@ -76,6 +95,9 @@ export default function CadastroDenuncia() {
                                 <input
                                     id="rua"
                                     type="text"
+                                    value={campos.rua}
+                                    onChange={(evento) => atualizarCampo("rua", evento.target.value)}
+                                    required
                                     placeholder="Rua ou avenida"
                                     className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                                 />
@@ -89,6 +111,8 @@ export default function CadastroDenuncia() {
                                 <input
                                     id="complemento"
                                     type="text"
+                                    value={campos.complemento}
+                                    onChange={(evento) => atualizarCampo("complemento", evento.target.value)}
                                     placeholder="Casa, bloco ou referência"
                                     className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                                 />
@@ -102,6 +126,9 @@ export default function CadastroDenuncia() {
                                 <input
                                     id="bairro"
                                     type="text"
+                                    value={campos.bairro}
+                                    onChange={(evento) => atualizarCampo("bairro", evento.target.value)}
+                                    required
                                     placeholder="Nome do bairro"
                                     className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 sm:max-w-[calc(50%-0.625rem)]"
                                 />
@@ -133,6 +160,9 @@ export default function CadastroDenuncia() {
                         <textarea
                             id="descricao"
                             rows={5}
+                            value={campos.descricao}
+                            onChange={(evento) => atualizarCampo("descricao", evento.target.value)}
+                            required
                             placeholder="Digite aqui a descrição do ocorrido..."
                             className="w-full resize-y rounded-lg border border-gray-300 px-4 py-3 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                         />
@@ -160,7 +190,9 @@ export default function CadastroDenuncia() {
 
                         <select
                             id="categoria"
-                            defaultValue=""
+                            value={campos.categoria}
+                            onChange={(evento) => atualizarCampo("categoria", evento.target.value)}
+                            required
                             className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-700 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                         >
                             <option value="" disabled>
@@ -198,6 +230,8 @@ export default function CadastroDenuncia() {
                         <textarea
                             id="resultado"
                             rows={3}
+                            value={campos.resultadoEsperado}
+                            onChange={(evento) => atualizarCampo("resultadoEsperado", evento.target.value)}
                             placeholder="Digite o resultado esperado..."
                             className="w-full resize-y rounded-lg border border-gray-300 px-4 py-3 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                         />
@@ -238,12 +272,19 @@ export default function CadastroDenuncia() {
                             <span className="mt-2 text-sm text-gray-500">
                                 Formatos aceitos: JPEG e PNG · Até 2 MB
                             </span>
+                            {arquivo && (
+                                <span className="mt-2 text-sm font-medium text-blue-700">
+                                    {arquivo.name}
+                                </span>
+                            )}
 
                             <input
+                                key={chaveInputArquivo}
                                 id="anexo"
                                 type="file"
                                 accept="image/jpeg,image/png"
                                 className="sr-only"
+                                onChange={selecionarArquivo}
                             />
                         </label>
                     </section>
@@ -251,10 +292,22 @@ export default function CadastroDenuncia() {
                     <hr className="border-gray-200" />
 
                     {/* Botões */}
+                    {mensagem && (
+                        <p
+                            role="status"
+                            className={`px-5 pt-4 text-sm sm:px-6 ${
+                                mensagemSucesso ? "text-emerald-700" : "text-red-700"
+                            }`}
+                        >
+                            {mensagem}
+                        </p>
+                    )}
+
                     <footer className="flex flex-col-reverse gap-3 bg-gray-50 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
 
                         <button
-                            type="reset"
+                            type="button"
+                            onClick={limparFormulario}
                             className="w-full rounded-lg border border-gray-300 bg-white px-5 py-3 font-semibold text-gray-700 transition hover:bg-gray-100 sm:w-auto"
                         >
                             Limpar formulário
@@ -262,6 +315,7 @@ export default function CadastroDenuncia() {
 
                         <button
                             type="button"
+                            onClick={() => void cadastrarDenuncia()}
                             className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 sm:w-auto"
                         >
                             Cadastrar denúncia

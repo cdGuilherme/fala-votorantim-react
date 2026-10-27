@@ -57,6 +57,7 @@ export default function App() {
         
         {/* Users */}
 
+        <Route path='/users/TelaInicial' element={<TelaInicialUser/>}/>
         <Route path='/users/TeleInicial' element={<TelaInicialUser/>}/>
         <Route path='/users/MeusDados' element={<MeusDados />}/>
         <Route path='/users/notificacoes' element={<Notificacoes/>}/>

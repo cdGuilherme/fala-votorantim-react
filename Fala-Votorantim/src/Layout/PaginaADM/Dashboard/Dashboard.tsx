@@ -1,72 +1,5 @@
-import { useMemo } from "react";
-
-import MenuLateralADM from "../../../Components/Cards/menuLateral/MenuLateralADM";
-
-import { denunciasIniciais } from "../../../Layout/FeedDenuncias/dadosDenuncias";
-
-import type { Denuncia } from "../../../Layout/FeedDenuncias/types";
-
-function normalizar(texto: string): string {
-    return texto
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim();
-}
-
-function converterData(data: string): number {
-    const [dataParte, horaParte = "00:00"] = data.split(", ");
-    const [dia, mes, ano] = dataParte.split("/").map(Number);
-    const [hora, minuto] = horaParte.split(":").map(Number);
-
-    const timestamp = new Date(
-        ano,
-        mes - 1,
-        dia,
-        hora,
-        minuto
-    ).getTime();
-
-    return Number.isNaN(timestamp) ? 0 : timestamp;
-}
-
-function identificarStatus(status: string): "pendente" | "andamento" | "concluida" | "outro" {
-    const valor = normalizar(status);
-
-    if (
-        valor.includes("pendente") ||
-        valor.includes("aguardando")
-    ) {
-        return "pendente";
-    }
-
-    if (
-        valor.includes("andamento") ||
-        valor.includes("analise") ||
-        valor.includes("encaminhada") ||
-        valor.includes("encaminhado")
-    ) {
-        return "andamento";
-    }
-
-    if (
-        valor.includes("conclu") ||
-        valor.includes("resolvid") ||
-        valor.includes("finaliz")
-    ) {
-        return "concluida";
-    }
-
-    return "outro";
-}
-
-function formatarData(data: string): string {
-    const [dataParte, horaParte] = data.split(", ");
-
-    return horaParte
-        ? `${dataParte} às ${horaParte}`
-        : dataParte;
-}
+import NavegacaoADM from "../NavegacaoADM";
+import useDashboardADM from "../../../hooks/Denuncias/useDashboardADM";
 
 function CartaoIndicador({
     titulo,
@@ -105,77 +38,28 @@ function CartaoIndicador({
 }
 
 export default function Dashboard() {
-    const indicadores = useMemo(() => {
-        const pendentes = denunciasIniciais.filter(
-            (denuncia) =>
-                identificarStatus(denuncia.status) === "pendente"
-        ).length;
-
-        const andamento = denunciasIniciais.filter(
-            (denuncia) =>
-                identificarStatus(denuncia.status) === "andamento"
-        ).length;
-
-        const concluidas = denunciasIniciais.filter(
-            (denuncia) =>
-                identificarStatus(denuncia.status) === "concluida"
-        ).length;
-
-        const categorias = denunciasIniciais.reduce<
-            Record<string, number>
-        >((acumulado, denuncia) => {
-            const categoria = denuncia.categoria || "Sem categoria";
-
-            acumulado[categoria] =
-                (acumulado[categoria] || 0) + 1;
-
-            return acumulado;
-        }, {});
-
-        const status = denunciasIniciais.reduce<
-            Record<string, number>
-        >((acumulado, denuncia) => {
-            const nomeStatus = denuncia.status || "Sem status";
-
-            acumulado[nomeStatus] =
-                (acumulado[nomeStatus] || 0) + 1;
-
-            return acumulado;
-        }, {});
-
-        const recentes = [...denunciasIniciais]
-            .sort(
-                (a, b) =>
-                    converterData(b.data) - converterData(a.data)
-            )
-            .slice(0, 5);
-
-        return {
-            total: denunciasIniciais.length,
-            pendentes,
-            andamento,
-            concluidas,
-            categorias: Object.entries(categorias).sort(
-                (a, b) => b[1] - a[1]
-            ),
-            status: Object.entries(status).sort(
-                (a, b) => b[1] - a[1]
-            ),
-            recentes,
-        };
-    }, []);
-
-    const maiorQuantidadeCategoria = Math.max(
-        1,
-        ...indicadores.categorias.map(([, quantidade]) => quantidade)
-    );
+    const {
+        indicadores,
+        maiorQuantidadeCategoria,
+        mensagemErro,
+        identificarStatus,
+        formatarData,
+    } = useDashboardADM();
 
     return (
         <div className="flex min-h-screen bg-[#EFF6FF]">
-            <MenuLateralADM />
+            <NavegacaoADM />
 
-            <main className="min-w-0 flex-1 px-4 pb-8 pt-20 sm:px-6 md:pt-6 lg:px-8">
+            <main className="min-w-0 flex-1 px-4 pb-8 pt-20 sm:px-6 lg:ml-64 lg:pt-6 lg:px-8">
                 <div className="mx-auto flex w-full max-w-7xl flex-col gap-7">
+                    {mensagemErro && (
+                        <p
+                            role="status"
+                            className="rounded-lg bg-amber-50 p-3 text-sm text-amber-800"
+                        >
+                            {mensagemErro}
+                        </p>
+                    )}
 
                     <header>
                         <p className="text-sm font-medium text-[#155DFC]">
@@ -359,7 +243,7 @@ export default function Dashboard() {
                         ) : (
                             <div className="divide-y divide-[#E5EAF3]">
                                 {indicadores.recentes.map(
-                                    (denuncia: Denuncia) => {
+                                    (denuncia) => {
                                         const grupo = identificarStatus(
                                             denuncia.status
                                         );

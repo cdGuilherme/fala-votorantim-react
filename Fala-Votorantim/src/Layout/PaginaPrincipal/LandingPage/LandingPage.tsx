@@ -1,9 +1,23 @@
-import Header from './../../../Components/Header/Header';
+import NavegacaoPublica from "../../NavegacaoPublica";
+import Footer from "../../../Components/Footer/Footer";
+import Hero from "./Hero";
+import Beneficios from "./Beneficios";
+import ComoFunciona from "./ComoFunciona";
+import PequenasAcoes from "./PequenasAcoes";
+import SobreNos from "./SobreNos";
+import FacaParte from "./FacaParte";
 
-function LandingPage() {
-    return(
-        <Header/>
-    )
+export default function LandingPage() {
+    return (
+        <div>
+            <NavegacaoPublica />
+            <Hero />
+            <Beneficios />
+            <ComoFunciona />
+            <PequenasAcoes />
+            <SobreNos />
+            <FacaParte />
+            <Footer />
+        </div>
+    );
 }
-
-export default LandingPage;
