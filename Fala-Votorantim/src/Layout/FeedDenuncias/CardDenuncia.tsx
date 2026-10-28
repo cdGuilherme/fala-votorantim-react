@@ -73,10 +73,6 @@ export default function CardDenuncia({
             <span className="rounded-full bg-[#F3F4F6] px-3 py-1 text-xs font-medium text-[#364153]">
               {denuncia.categoria}
             </span>
-
-            <span className="ml-auto text-xs font-medium text-[#99A1AF]">
-              #{denuncia.id}
-            </span>
           </div>
 
           {/* Título e descrição */}
@@ -89,12 +85,17 @@ export default function CardDenuncia({
           </p>
         </div>
 
-        <img
-          src={imagemDenuncia(denuncia)}
-          alt=""
-          loading="lazy"
-          className="h-24 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-32"
-        />
+        <div className="relative aspect-square w-[30%] shrink-0 self-start overflow-hidden rounded-xl bg-[#F3F4F6]">
+          <img
+            src={imagemDenuncia(denuncia)}
+            alt=""
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+          <span className="absolute left-2 top-2 rounded-full bg-[#1E2939]/75 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur">
+            #{denuncia.id}
+          </span>
+        </div>
       </div>
 
       {/* Local, data e ações */}
