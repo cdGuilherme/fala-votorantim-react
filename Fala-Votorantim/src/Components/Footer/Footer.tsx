@@ -13,7 +13,7 @@ export default function Footer() {
         <footer className="bg-[#1E2939] flex gap-20 p-5">
             <div className="flex flex-col gap-5">
                 <div>
-                    <NavLink to={"/"}><img src="/Logo.png" alt="Logo do Fala Votorantim" className="w-[3.5vw] h-[3.5vw] rounded-[50%]"/></NavLink>
+                    <NavLink to={"/"}><img src="/simbolo-branco.svg" alt="Logo do Fala Votorantim" className="h-12 w-12"/></NavLink>
                 </div>
                 <div className="flex gap-3">
                     <a href="http://" target="_blank" rel="noopener noreferrer"><img src="/twitter-x.svg" alt="" className="w-[2vw] h-[2vw]"/></a>
