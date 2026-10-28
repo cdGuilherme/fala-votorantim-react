@@ -40,15 +40,13 @@ export default function FeedDenuncias() {
 
             <main className="min-w-0 flex-1 px-4 pb-10 pt-20 sm:px-6 lg:ml-64 lg:px-10 lg:pt-8">
                 <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
-                    <header className="flex flex-col gap-2">
-                        <span className="text-sm font-semibold uppercase tracking-widest text-[#1447E6]">
-                            Painel administrativo
-                        </span>
-                        <h1 className="text-3xl font-bold tracking-tight text-[#1E2939]">
+                    <header className="flex flex-col gap-1">
+                        <h1 className="text-2xl font-bold text-[#1E2939] sm:text-3xl">
                             Feed de Denúncias
                         </h1>
-                        <p className="text-[#6A7282]">
-                            Verifique as denúncias registradas em Votorantim, abra os detalhes e atualize o andamento de cada uma.
+
+                        <p className="text-sm text-[#155DFC] sm:text-base">
+                            Gerenciar
                         </p>
                     </header>
 

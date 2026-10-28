@@ -62,13 +62,13 @@ export default function Dashboard() {
                     )}
 
                     <header>
-                        <p className="text-sm font-medium text-[#155DFC]">
-                            Administração
-                        </p>
-
                         <h1 className="mt-1 text-2xl font-bold text-[#1E2939] sm:text-3xl">
                             Dashboard
                         </h1>
+
+                        <p className="text-sm font-medium text-[#155DFC]">
+                            Administração
+                        </p>
                     </header>
 
                     <section>
