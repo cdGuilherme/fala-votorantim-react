@@ -39,8 +39,8 @@ export default function FeedDenuncias() {
                             Feed de Denúncias
                         </h1>
 
-                        <p className="text-sm text-[#6A7282] sm:text-base">
-                            Gerencie e acompanhe as denúncias registradas em Votorantim.
+                        <p className="text-sm text-[#155DFC] sm:text-base">
+                            Gerenciar
                         </p>
                     </header>
 
