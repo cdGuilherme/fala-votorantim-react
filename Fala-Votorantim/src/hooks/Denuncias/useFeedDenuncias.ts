@@ -20,7 +20,14 @@ function converterData(data: string): number {
 }
 
 export default function useFeedDenuncias() {
-    const { denuncias, mensagemErro, alterarStatus } = useDenuncias();
+    const {
+        denuncias,
+        mensagemErro,
+        alterarStatus,
+        responderDenuncia,
+        encaminharDenuncia,
+        historicoDe,
+    } = useDenuncias();
     const [busca, setBusca] = useState("");
     const [mostrarFiltros, setMostrarFiltros] = useState(false);
     const [categoriasSelecionadas, setCategoriasSelecionadas] = useState<
@@ -133,5 +140,8 @@ export default function useFeedDenuncias() {
         setOrdemData,
         limparFiltros,
         alterarStatus,
+        responderDenuncia,
+        encaminharDenuncia,
+        historicoDe,
     };
 }

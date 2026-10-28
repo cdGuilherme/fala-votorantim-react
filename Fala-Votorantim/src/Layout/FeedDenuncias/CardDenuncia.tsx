@@ -15,6 +15,7 @@ type CardDenunciaProps = {
   denuncia: Denuncia;
   acoes?: AcoesCard;
   onAbrir?: () => void;
+  rotuloAbrir?: string;
 };
 
 function Icone({ d, cheio }: { d: string; cheio?: boolean }) {
@@ -43,6 +44,7 @@ export default function CardDenuncia({
   denuncia,
   acoes,
   onAbrir,
+  rotuloAbrir = "Ver e gerenciar",
 }: CardDenunciaProps) {
   return (
     <article
@@ -111,47 +113,49 @@ export default function CardDenuncia({
           </span>
         </div>
 
-        {acoes && (
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={acoes.onFavoritar}
-              aria-pressed={acoes.favorita}
-              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
-                acoes.favorita
-                  ? "border-[#FDE68A] bg-[#FEFCE8] text-[#A65F00]"
-                  : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
-              }`}
-            >
-              <Icone d={iconeEstrela} cheio={acoes.favorita} />
-              {acoes.favorita ? "Favoritada" : "Favoritar"}
-            </button>
-            <button
-              type="button"
-              onClick={acoes.onSalvar}
-              aria-pressed={acoes.salva}
-              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
-                acoes.salva
-                  ? "border-[#BEDBFF] bg-[#EFF6FF] text-[#1447E6]"
-                  : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
-              }`}
-            >
-              <Icone d={iconeSalvar} cheio={acoes.salva} />
-              {acoes.salva ? "Salva" : "Salvar"}
-            </button>
-          </div>
-        )}
+        <div className="flex flex-wrap gap-2">
+          {acoes && (
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={acoes.onFavoritar}
+                aria-pressed={acoes.favorita}
+                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
+                  acoes.favorita
+                    ? "border-[#FDE68A] bg-[#FEFCE8] text-[#A65F00]"
+                    : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
+                }`}
+              >
+                <Icone d={iconeEstrela} cheio={acoes.favorita} />
+                {acoes.favorita ? "Favoritada" : "Favoritar"}
+              </button>
+              <button
+                type="button"
+                onClick={acoes.onSalvar}
+                aria-pressed={acoes.salva}
+                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
+                  acoes.salva
+                    ? "border-[#BEDBFF] bg-[#EFF6FF] text-[#1447E6]"
+                    : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
+                }`}
+              >
+                <Icone d={iconeSalvar} cheio={acoes.salva} />
+                {acoes.salva ? "Salva" : "Salvar"}
+              </button>
+            </div>
+          )}
 
-        {onAbrir && (
-          <button
-            type="button"
-            onClick={onAbrir}
-            className="flex items-center justify-center gap-1.5 rounded-lg bg-[#1447E6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#193CB8]"
-          >
-            Ver e gerenciar
-            <span aria-hidden="true">→</span>
-          </button>
-        )}
+          {onAbrir && (
+            <button
+              type="button"
+              onClick={onAbrir}
+              className="flex items-center justify-center gap-1.5 rounded-lg bg-[#1447E6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#193CB8]"
+            >
+              {rotuloAbrir}
+              <span aria-hidden="true">→</span>
+            </button>
+          )}
+        </div>
       </div>
     </article>
   );

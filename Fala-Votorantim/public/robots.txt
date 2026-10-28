@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cdguilherme.github.io/fala-votorantim-react/sitemap.xml
