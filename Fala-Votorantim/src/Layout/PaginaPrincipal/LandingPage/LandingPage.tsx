@@ -1,7 +1,6 @@
 import NavegacaoPublica from "../../NavegacaoPublica";
 import Footer from "../../../Components/Footer/Footer";
 import Hero from "./Hero";
-import Beneficios from "./Beneficios";
 import ComoFunciona from "./ComoFunciona";
 import PequenasAcoes from "./PequenasAcoes";
 import SobreNos from "./SobreNos";
