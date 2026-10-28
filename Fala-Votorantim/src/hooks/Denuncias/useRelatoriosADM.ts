@@ -12,6 +12,7 @@ function interpretarStatus(status: string) {
     if (
         valor.includes("conclu") ||
         valor.includes("resolvid") ||
+        valor.includes("indeferid") ||
         valor.includes("finaliz")
     ) {
         return "Concluídas";
@@ -19,6 +20,7 @@ function interpretarStatus(status: string) {
 
     if (
         valor.includes("andamento") ||
+        valor.includes("execu") ||
         valor.includes("analise") ||
         valor.includes("encaminhad")
     ) {

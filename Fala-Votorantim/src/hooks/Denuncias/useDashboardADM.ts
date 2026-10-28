@@ -29,12 +29,13 @@ function converterData(data: string): number {
 function identificarStatus(status: string): GrupoStatus {
     const valor = normalizar(status);
 
-    if (valor.includes("pendente") || valor.includes("aguardando")) {
+    if (valor.includes("pendente") || valor.includes("aguardando") || valor.includes("recebid")) {
         return "pendente";
     }
 
     if (
         valor.includes("andamento") ||
+        valor.includes("execu") ||
         valor.includes("analise") ||
         valor.includes("encaminhada") ||
         valor.includes("encaminhado")
@@ -45,6 +46,7 @@ function identificarStatus(status: string): GrupoStatus {
     if (
         valor.includes("conclu") ||
         valor.includes("resolvid") ||
+        valor.includes("indeferid") ||
         valor.includes("finaliz")
     ) {
         return "concluida";

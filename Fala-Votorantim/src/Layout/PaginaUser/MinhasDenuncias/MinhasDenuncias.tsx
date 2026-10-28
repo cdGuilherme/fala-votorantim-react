@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { NavLink } from "react-router-dom";
 import LayoutUser from "../LayoutUser";
 import ListaDenuncias from "../../FeedDenuncias/ListaDenuncias";
+import DetalheDenuncia from "../../FeedDenuncias/DetalheDenuncia";
 import useSessao from "../../../hooks/useSessao";
 import useDenuncias from "../../../hooks/Denuncias/useDenuncias";
 import useInteracoesDenuncias from "../../../hooks/Denuncias/useInteracoesDenuncias";
@@ -12,7 +13,10 @@ type Aba = "minhas" | "salvas" | "favoritas";
 
 export default function MinhasDenuncias() {
     const { sessao } = useSessao();
-    const { denuncias } = useDenuncias();
+    const { denuncias, historicoDe } = useDenuncias();
+    const [idAberta, setIdAberta] = useState<string | null>(null);
+    const denunciaAberta = denuncias.find((d) => d.id === idAberta);
+    const fecharDetalhe = useCallback(() => setIdAberta(null), []);
     const { favoritas, salvas, alternarFavorita, alternarSalva } =
         useInteracoesDenuncias(sessao?.email);
     const [aba, setAba] = useState<Aba>("minhas");
@@ -75,8 +79,19 @@ export default function MinhasDenuncias() {
                     onFavoritar: () => alternarFavorita(denuncia.id),
                     onSalvar: () => alternarSalva(denuncia.id),
                 })}
+                onAbrir={(denuncia) => setIdAberta(denuncia.id)}
+                rotuloAbrir="Ver detalhes"
                 mensagemVazia={vazias[aba]}
             />
+
+            {denunciaAberta && (
+                <DetalheDenuncia
+                    key={denunciaAberta.id}
+                    denuncia={denunciaAberta}
+                    historico={historicoDe(denunciaAberta.id)}
+                    onFechar={fecharDetalhe}
+                />
+            )}
         </LayoutUser>
     );
 }

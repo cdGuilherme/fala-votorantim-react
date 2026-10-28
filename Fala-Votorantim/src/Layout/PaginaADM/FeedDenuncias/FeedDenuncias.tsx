@@ -5,6 +5,10 @@ import FiltrosDenuncias from "../../../Layout/FeedDenuncias/FiltrosDenuncias";
 import ListaDenuncias from "../../../Layout/FeedDenuncias/ListaDenuncias";
 import DetalheDenuncia from "../../../Layout/FeedDenuncias/DetalheDenuncia";
 import useFeedDenuncias from "../../../hooks/Denuncias/useFeedDenuncias";
+import useSessao from "../../../hooks/useSessao";
+import { contasAdministrativasDemonstracao } from "../../../LoginADM/contasDemonstracao";
+
+const secretarias = contasAdministrativasDemonstracao.map((conta) => conta.secretaria);
 
 export default function FeedDenuncias() {
     const {
@@ -27,7 +31,12 @@ export default function FeedDenuncias() {
         setOrdemData,
         limparFiltros,
         alterarStatus,
+        responderDenuncia,
+        encaminharDenuncia,
+        historicoDe,
     } = useFeedDenuncias();
+    const { sessao } = useSessao();
+    const responsavel = sessao?.secretaria ?? "Prefeitura";
 
     // Guarda só o id para o painel sempre mostrar o status mais recente.
     const [idAberta, setIdAberta] = useState<string | null>(null);
@@ -88,8 +97,14 @@ export default function FeedDenuncias() {
                 <DetalheDenuncia
                     key={denunciaAberta.id}
                     denuncia={denunciaAberta}
+                    historico={historicoDe(denunciaAberta.id)}
                     onFechar={fecharDetalhe}
-                    onAlterarStatus={alterarStatus}
+                    gestao={{
+                        secretarias,
+                        onAlterarStatus: (id, status) => alterarStatus(id, status, responsavel),
+                        onResponder: (id, texto) => responderDenuncia(id, texto, responsavel),
+                        onEncaminhar: (id, nome) => encaminharDenuncia(id, nome, responsavel),
+                    }}
                 />
             )}
         </div>

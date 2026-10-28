@@ -63,12 +63,13 @@ function normalizarStatus(status: Status): string {
         .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase();
 
-    if (valor.includes("pendente") || valor.includes("aguardando")) {
+    if (valor.includes("pendente") || valor.includes("aguardando") || valor.includes("recebid")) {
         return "pendente";
     }
 
     if (
         valor.includes("andamento") ||
+        valor.includes("execu") ||
         valor.includes("analise") ||
         valor.includes("encaminhad")
     ) {

@@ -21,7 +21,7 @@ const passos = [
     {
         titulo: "Acompanhe o andamento",
         texto: "Veja o status da sua denúncia diretamente pela plataforma, com mais transparência sobre os problemas reportados na cidade.",
-        status: ["Pendente", "Em andamento", "Resolvido"],
+        status: ["Recebida", "Em análise", "Em execução", "Concluída"],
     },
     {
         titulo: "Ajude a melhorar Votorantim",
@@ -29,7 +29,7 @@ const passos = [
     },
 ]
 
-const coresStatus = ["bg-[#FEFCE8] text-[#A65F00]", "bg-[#EFF6FF] text-[#1C398E]", "bg-[#F0FDF4] text-[#0D542B]"]
+const coresStatus = ["bg-[#FEFCE8] text-[#A65F00]", "bg-[#FAF5FF] text-[#6E11B0]", "bg-[#EFF6FF] text-[#1C398E]", "bg-[#F0FDF4] text-[#0D542B]"]
 
 function ComoFunciona() {
     return (

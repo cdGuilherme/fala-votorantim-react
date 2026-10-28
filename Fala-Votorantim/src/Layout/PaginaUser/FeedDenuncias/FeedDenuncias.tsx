@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import LayoutUser from "../LayoutUser";
 import ResumoDenuncias from "../../FeedDenuncias/ResumoDenuncias";
 import FiltrosDenuncias from "../../FeedDenuncias/FiltrosDenuncias";
 import ListaDenuncias from "../../FeedDenuncias/ListaDenuncias";
+import DetalheDenuncia from "../../FeedDenuncias/DetalheDenuncia";
 import useFeedDenuncias from "../../../hooks/Denuncias/useFeedDenuncias";
 import useInteracoesDenuncias from "../../../hooks/Denuncias/useInteracoesDenuncias";
 import useSessao from "../../../hooks/useSessao";
@@ -29,7 +30,11 @@ export default function FeedDenuncias() {
         ordemData,
         setOrdemData,
         limparFiltros,
+        historicoDe,
     } = useFeedDenuncias();
+    const [idAberta, setIdAberta] = useState<string | null>(null);
+    const denunciaAberta = denuncias.find((d) => d.id === idAberta);
+    const fecharDetalhe = useCallback(() => setIdAberta(null), []);
     const { sessao } = useSessao();
     const { favoritas, salvas, alternarFavorita, alternarSalva } =
         useInteracoesDenuncias(sessao?.email);
@@ -114,7 +119,18 @@ export default function FeedDenuncias() {
                           ? "Você ainda não salvou nenhuma denúncia com esses filtros."
                           : "Tente alterar os filtros da pesquisa."
                 }
+                onAbrir={(denuncia) => setIdAberta(denuncia.id)}
+                rotuloAbrir="Ver detalhes"
             />
+
+            {denunciaAberta && (
+                <DetalheDenuncia
+                    key={denunciaAberta.id}
+                    denuncia={denunciaAberta}
+                    historico={historicoDe(denunciaAberta.id)}
+                    onFechar={fecharDetalhe}
+                />
+            )}
         </LayoutUser>
     );
 }

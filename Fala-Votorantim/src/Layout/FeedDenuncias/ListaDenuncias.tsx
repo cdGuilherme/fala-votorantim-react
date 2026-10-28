@@ -7,6 +7,7 @@ type ListaDenunciasProps = {
     quantidadeInicial?: number;
     acoesPara?: (denuncia: Denuncia) => AcoesCard;
     onAbrir?: (denuncia: Denuncia) => void;
+    rotuloAbrir?: string;
     mensagemVazia?: string;
 };
 
@@ -78,6 +79,7 @@ export default function ListaDenuncias({
     quantidadeInicial,
     acoesPara,
     onAbrir,
+    rotuloAbrir,
     mensagemVazia = "Tente alterar os filtros da pesquisa.",
 }: ListaDenunciasProps) {
     const {
@@ -109,6 +111,7 @@ export default function ListaDenuncias({
                                 denuncia={denuncia}
                                 acoes={acoesPara?.(denuncia)}
                                 onAbrir={onAbrir && (() => onAbrir(denuncia))}
+                                rotuloAbrir={rotuloAbrir}
                             />
                         ))}
                     </div>

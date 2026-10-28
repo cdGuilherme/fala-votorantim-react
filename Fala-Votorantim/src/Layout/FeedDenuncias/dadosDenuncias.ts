@@ -37,22 +37,35 @@ export const categoriasAgrupadas: GrupoCategoria[] = [
 ];
 
 export const statusDisponiveis: Status[] = [
-	"Pendente",
-	"Em andamento",
-	"Resolvido",
+	"Recebida",
+	"Em análise",
+	"Em execução",
+	"Concluída",
+	"Indeferida",
 ];
 
+// Converte os status usados antes da adoção dos status do PI.
+export const statusAntigos: Record<string, Status> = {
+	Pendente: "Recebida",
+	"Em andamento": "Em execução",
+	Resolvido: "Concluída",
+};
+
 export const estilosStatus: Record<Status, string> = {
-	Pendente: "border-[#FDE68A] bg-[#FEFCE8] text-[#A65F00]",
-	"Em andamento": "border-[#BEDBFF] bg-[#EFF6FF] text-[#1C398E]",
-	Resolvido: "border-[#B9F8CF] bg-[#F0FDF4] text-[#0D542B]",
+	Recebida: "border-[#FDE68A] bg-[#FEFCE8] text-[#A65F00]",
+	"Em análise": "border-[#E9D4FF] bg-[#FAF5FF] text-[#6E11B0]",
+	"Em execução": "border-[#BEDBFF] bg-[#EFF6FF] text-[#1C398E]",
+	Concluída: "border-[#B9F8CF] bg-[#F0FDF4] text-[#0D542B]",
+	Indeferida: "border-[#E5E7EB] bg-[#F3F4F6] text-[#364153]",
 };
 
 // Cor do ponto e da faixa lateral de cada status.
 export const corStatus: Record<Status, string> = {
-	Pendente: "#F0B100",
-	"Em andamento": "#1447E6",
-	Resolvido: "#00A63E",
+	Recebida: "#F0B100",
+	"Em análise": "#9810FA",
+	"Em execução": "#1447E6",
+	Concluída: "#00A63E",
+	Indeferida: "#99A1AF",
 };
 
 // Foto ilustrativa por categoria (créditos em public/denuncias/CREDITOS.md).
@@ -73,9 +86,10 @@ const fotosCategoria: Record<string, string> = {
 
 // A foto enviada pelo munícipe tem prioridade sobre a ilustrativa.
 export function imagemDenuncia(denuncia: Denuncia): string {
-	if (denuncia.anexoDataUrl?.startsWith("data:image/")) return denuncia.anexoDataUrl;
-	const foto = fotosCategoria[denuncia.categoria] ?? "buraco";
-	return `${import.meta.env.BASE_URL}denuncias/${foto}.jpg`;
+	const foto = denuncia.anexos?.[0]?.dataUrl ?? denuncia.anexoDataUrl;
+	if (foto?.startsWith("data:image/")) return foto;
+	const ilustrativa = fotosCategoria[denuncia.categoria] ?? "buraco";
+	return `${import.meta.env.BASE_URL}denuncias/${ilustrativa}.jpg`;
 }
 
 export const denunciasIniciais: Denuncia[] = [
@@ -87,7 +101,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Dois buracos se formaram próximos ao cruzamento e obrigam os motoristas a desviar repentinamente. Moradores relatam que o problema aumentou após as últimas chuvas.",
 		endereco: "Rua Antônio Perez, 85, Jardim Europa",
 		data: "01/01/2024, 08:40",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1002",
@@ -97,7 +111,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Algumas placas da calçada estão soltas e desniveladas, dificultando a passagem de idosos e pessoas com mobilidade reduzida.",
 		endereco: "Rua José Maria, 210, Vila Carvalho",
 		data: "15/02/2024, 09:15",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1003",
@@ -107,7 +121,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Uma placa de sinalização está caída junto ao meio-fio e não pode ser vista pelos motoristas que chegam ao cruzamento.",
 		endereco: "Avenida Independência, 540, Centro",
 		data: "28/03/2024, 10:05",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1004",
@@ -117,7 +131,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"O poste permanece apagado durante a noite há vários dias, deixando parte da rua sem iluminação e dificultando a circulação de pedestres.",
 		endereco: "Rua dos Ipês, 72, Jardim Simus",
 		data: "10/04/2024, 19:20",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1005",
@@ -127,7 +141,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um trecho extenso da avenida está sem iluminação pública, tornando a travessia de pedestres e a circulação noturna mais difíceis.",
 		endereco: "Avenida Paraná, 1180, Jardim Santa Rosália",
 		data: "22/05/2024, 07:50",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1006",
@@ -137,7 +151,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Há fios aparentemente soltos e componentes danificados na estrutura de um poste. A área merece avaliação técnica para prevenir acidentes.",
 		endereco: "Rua Bela Vista, 340, Vila Santana",
 		data: "05/06/2024, 08:25",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1007",
@@ -147,7 +161,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Sacolas, embalagens e restos de alimentos estão acumulados ao lado da praça. O material permanece no local e atrai animais.",
 		endereco: "Praça das Palmeiras, 15, Jardim Planalto",
 		data: "18/07/2024, 09:10",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1008",
@@ -157,7 +171,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Móveis velhos, pedaços de madeira e outros materiais volumosos foram deixados na calçada, reduzindo o espaço de passagem.",
 		endereco: "Rua Francisco Bueno, 425, Vila Hortência",
 		data: "30/08/2024, 10:35",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1009",
@@ -167,7 +181,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"O terreno está com vegetação alta e resíduos espalhados. Moradores solicitam vistoria e manutenção para reduzir riscos e melhorar a conservação da área.",
 		endereco: "Rua das Paineiras, 160, Jardim São Paulo",
 		data: "12/09/2024, 11:00",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1010",
@@ -177,7 +191,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Água limpa está escorrendo continuamente junto à guia, formando uma poça e desperdiçando água mesmo sem chuva.",
 		endereco: "Rua Padre Madureira, 98, Centro",
 		data: "25/10/2024, 11:45",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1011",
@@ -187,7 +201,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um forte odor semelhante a esgoto vem de um bueiro e persiste durante boa parte do dia. É necessária uma avaliação do sistema de saneamento.",
 		endereco: "Rua João Wagner Wey, 310, Jardim América",
 		data: "08/11/2024, 12:20",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1012",
@@ -197,7 +211,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A tampa de um bueiro está desnivelada em relação ao pavimento, causando impactos nos veículos e oferecendo risco a ciclistas.",
 		endereco: "Rua Álvaro Soares, 675, Centro",
 		data: "20/12/2024, 13:05",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1013",
@@ -207,7 +221,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"O pavimento apresenta um afundamento próximo à faixa de estacionamento. A irregularidade está aumentando e pode causar danos aos veículos.",
 		endereco: "Rua Nogueira Padilha, 890, Vila Hortência",
 		data: "05/01/2025, 14:10",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1014",
@@ -217,7 +231,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A rampa de acessibilidade está rachada e apresenta desníveis, dificultando o acesso seguro de cadeirantes e pessoas com carrinhos.",
 		endereco: "Rua da Penha, 145, Centro",
 		data: "17/02/2025, 14:55",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1015",
@@ -227,7 +241,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A pintura da faixa de pedestres está bastante desgastada e quase não pode ser identificada pelos motoristas, especialmente à noite.",
 		endereco: "Avenida General Carneiro, 720, Vila Lucy",
 		data: "29/03/2025, 15:30",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1016",
@@ -237,7 +251,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A luminária acende e apaga repetidamente durante a noite, deixando a iluminação da calçada irregular.",
 		endereco: "Rua Antônio Perez, 190, Jardim Europa",
 		data: "11/04/2025, 06:50",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1017",
@@ -247,7 +261,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A área central da praça permanece muito escura após o anoitecer, dificultando o uso dos caminhos e bancos pelos moradores.",
 		endereco: "Praça do Trabalhador, 40, Vila Progresso",
 		data: "23/05/2025, 07:30",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1018",
@@ -257,7 +271,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Uma caixa de instalação elétrica localizada junto à calçada apresenta partes quebradas. Solicita-se inspeção para verificar as condições de segurança.",
 		endereco: "Rua Santa Clara, 265, Jardim Vera Cruz",
 		data: "06/06/2025, 08:15",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1019",
@@ -267,7 +281,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Restos de resíduos ficaram espalhados pela calçada após a coleta, incluindo embalagens e sacos rasgados que ainda não foram recolhidos.",
 		endereco: "Rua Comendador Oetterer, 510, Vila Carvalho",
 		data: "19/07/2025, 09:00",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1020",
@@ -277,7 +291,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Tijolos quebrados, sacos de cimento e pedaços de concreto foram depositados na calçada, bloqueando parcialmente a passagem.",
 		endereco: "Rua João Ribeiro de Barros, 155, Jardim Faculdade",
 		data: "31/08/2025, 09:45",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1021",
@@ -287,7 +301,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"O imóvel aparenta estar desocupado e possui resíduos visíveis no quintal. Solicita-se vistoria para verificar a necessidade de limpeza.",
 		endereco: "Rua Pedro José Senger, 82, Jardim Guadalajara",
 		data: "13/09/2025, 10:25",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1022",
@@ -297,7 +311,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Uma pequena corrente de água sai de uma conexão próxima à calçada e segue até a sarjeta. O vazamento continua ao longo do dia.",
 		endereco: "Rua Benedito de Oliveira Cassu, 230, Jardim Maria Eugênia",
 		data: "26/10/2025, 11:10",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1023",
@@ -307,7 +321,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Foi observado líquido com odor forte retornando por uma abertura de drenagem. O local precisa de avaliação para identificar a origem do problema.",
 		endereco: "Rua Octaviano Gozzano, 470, Jardim Paulistano",
 		data: "09/11/2025, 11:55",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1024",
@@ -317,7 +331,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Após uma intervenção na via, o trecho de pavimento ficou irregular e apresenta diferenças de altura que dificultam a passagem de veículos.",
 		endereco: "Rua Professor Toledo, 330, Centro",
 		data: "21/12/2025, 12:40",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1025",
@@ -327,7 +341,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um buraco próximo à parada de ônibus obriga os passageiros a caminhar pela lateral da via para embarcar com segurança.",
 		endereco: "Avenida Itavuvu, 1450, Jardim Santa Cecília",
 		data: "03/01/2026, 13:20",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1026",
@@ -337,7 +351,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"As raízes de uma árvore levantaram partes da calçada e criaram um desnível que pode provocar tropeços.",
 		endereco: "Rua Mascarenhas Camelo, 210, Vila Santana",
 		data: "15/02/2026, 14:05",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1027",
@@ -347,7 +361,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A placa de identificação da rua está danificada e com letras desgastadas, dificultando a localização do endereço por visitantes e serviços de entrega.",
 		endereco: "Rua João de Barros, 65, Jardim Paulistano",
 		data: "28/02/2026, 14:50",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1028",
@@ -357,7 +371,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A luminária de um poste parece estar danificada e não ilumina o trecho da calçada. Solicita-se manutenção do equipamento.",
 		endereco: "Rua Miguel Sutil, 305, Jardim Simus",
 		data: "12/03/2026, 15:35",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1029",
@@ -367,7 +381,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um segmento da ciclovia fica completamente escuro à noite, dificultando a visualização do caminho por ciclistas e pedestres.",
 		endereco: "Avenida Dom Aguirre, 2200, Jardim Santa Rosália",
 		data: "24/03/2026, 07:05",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1030",
@@ -377,7 +391,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Cabos estão pendendo abaixo da altura habitual sobre uma passagem pública. É necessária avaliação da equipe responsável pela rede.",
 		endereco: "Rua Américo Brasiliense, 140, Vila Carvalho",
 		data: "06/04/2026, 07:50",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1031",
@@ -387,7 +401,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"O contêiner está cheio e há sacos de lixo ao redor, ocupando parte da calçada e espalhando resíduos pelo local.",
 		endereco: "Rua Padre Luiz, 410, Centro",
 		data: "18/04/2026, 08:35",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1032",
@@ -397,7 +411,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Galhos, folhas e restos de poda foram deixados junto à sarjeta e ocupam parte da faixa de estacionamento.",
 		endereco: "Rua Francisco Silva, 95, Jardim Simus",
 		data: "30/04/2026, 09:20",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1033",
@@ -407,7 +421,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Há pontos com água parada e resíduos em um terreno sem manutenção aparente. Solicita-se vistoria e providências de limpeza.",
 		endereco: "Rua Antônio de Andrade, 370, Jardim São Guilherme",
 		data: "12/05/2026, 10:00",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1034",
@@ -417,7 +431,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um registro junto ao passeio apresenta vazamento contínuo, mantendo o pavimento molhado e formando uma poça próxima à entrada de uma residência.",
 		endereco: "Rua Coronel Nogueira Padilha, 610, Vila Hortência",
 		data: "14/05/2026, 10:45",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1035",
@@ -427,7 +441,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um líquido com odor característico está escorrendo pela sarjeta. O problema requer inspeção para verificar possível falha na rede de esgoto.",
 		endereco: "Rua João Gabriel Mendes, 175, Jardim Guadalajara",
 		data: "20/05/2026, 11:30",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1036",
@@ -437,7 +451,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Folhas e resíduos cobrem a entrada do bueiro, dificultando o escoamento da água da chuva e aumentando o risco de alagamento.",
 		endereco: "Rua São Bento, 520, Centro",
 		data: "05/06/2026, 12:15",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1037",
@@ -447,7 +461,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um buraco localizado na faixa de circulação exige desvios dos veículos e pode causar acidentes, principalmente durante a noite.",
 		endereco: "Avenida São Paulo, 980, Além Ponte",
 		data: "18/06/2026, 13:00",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1038",
@@ -457,7 +471,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Parte do piso tátil está quebrada e algumas peças estão ausentes, prejudicando a orientação de pessoas com deficiência visual.",
 		endereco: "Rua Doutor Álvaro Soares, 120, Centro",
 		data: "02/07/2026, 13:45",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1039",
@@ -467,7 +481,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um dos sinais luminosos destinados aos pedestres não está funcionando corretamente, deixando a travessia menos previsível.",
 		endereco: "Avenida Afonso Vergueiro, 660, Centro",
 		data: "15/07/2026, 14:30",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1040",
@@ -477,7 +491,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"O poste próximo ao ponto de ônibus está apagado, dificultando a identificação do local de embarque durante a noite.",
 		endereco: "Avenida Ipanema, 1750, Jardim Planalto",
 		data: "28/07/2026, 07:15",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1041",
@@ -487,7 +501,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A passagem entre duas ruas possui iluminação insuficiente e fica escura após o anoitecer, dificultando a circulação.",
 		endereco: "Rua Maria Cinto de Biaggi, 88, Jardim Santa Rosália",
 		data: "10/08/2026, 08:00",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1042",
@@ -497,7 +511,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A tampa de uma caixa de instalação elétrica em área pública está quebrada. Solicita-se inspeção e reparo para evitar contato acidental.",
 		endereco: "Rua Doutor Braguinha, 245, Centro",
 		data: "23/08/2026, 08:45",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1043",
@@ -507,7 +521,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Há resíduos espalhados ao redor do ponto de coleta, incluindo papelão, embalagens e sacolas, prejudicando a limpeza da calçada.",
 		endereco: "Rua Júlio de Mesquita, 390, Vila Santana",
 		data: "05/09/2026, 09:30",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1044",
@@ -517,7 +531,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Colchões e peças de mobiliário foram deixados em um espaço público próximo à via, sem indicação de coleta programada.",
 		endereco: "Rua José Tótora, 135, Jardim Europa",
 		data: "18/09/2026, 10:15",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1045",
@@ -527,7 +541,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A vegetação do lote está avançando em direção à calçada e dificulta a passagem. Solicita-se verificação da manutenção do terreno.",
 		endereco: "Rua Joaquim Machado, 440, Jardim São Guilherme",
 		data: "01/10/2026, 11:00",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1046",
@@ -537,7 +551,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A água está saindo do solo próximo à praça e se espalha pelo passeio. O local permanece molhado mesmo em períodos sem chuva.",
 		endereco: "Rua Professora Maria de Almeida, 75, Vila Progresso",
 		data: "08/10/2026, 11:45",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1047",
@@ -547,7 +561,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Foi percebido retorno de líquido e odor desagradável em uma área próxima à rede de drenagem. Solicita-se avaliação técnica para identificar a causa.",
 		endereco: "Rua Lituânia, 285, Jardim Europa",
 		data: "15/10/2026, 12:30",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1048",
@@ -557,7 +571,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A sarjeta apresenta partes quebradas e desníveis que dificultam o escoamento da água e podem causar acúmulo durante as chuvas.",
 		endereco: "Rua da Penha, 510, Centro",
 		data: "20/10/2026, 13:15",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1049",
@@ -567,7 +581,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"Um buraco junto à entrada de uma garagem dificulta a passagem dos veículos e vem aumentando de tamanho com o tráfego.",
 		endereco: "Rua José Joaquim de Lacerda, 205, Vila Hortência",
 		data: "23/10/2026, 14:00",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1050",
@@ -577,7 +591,7 @@ export const denunciasIniciais: Denuncia[] = [
 			"A calçada possui um desnível acentuado em frente ao estabelecimento, obrigando pedestres a desviar e podendo provocar quedas.",
 		endereco: "Rua Barão de Tatuí, 325, Jardim Vergueiro",
 		data: "25/10/2026, 14:45",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1051",
@@ -586,7 +600,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há um buraco profundo no pavimento, dificultando a passagem de veículos e ciclistas.",
 		endereco: "Rua Barão de Tatuí, 163, Centro",
 		data: "02/08/2026, 08:52",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1052",
@@ -595,7 +609,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Trechos da calçada estão quebrados e dificultam a circulação segura de pedestres.",
 		endereco: "Avenida 31 de Março, 176, Vila Nova",
 		data: "03/08/2026, 03:59",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1053",
@@ -604,7 +618,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A placa está danificada e sua sinalização está difícil de identificar.",
 		endereco: "Rua João Pessoa, 189, Jardim Vergueiro",
 		data: "03/08/2026, 23:06",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1054",
@@ -613,7 +627,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A pintura da faixa está desgastada, reduzindo a visibilidade para motoristas.",
 		endereco: "Rua Albertina Nascimento, 202, Parque Bela Vista",
 		data: "04/08/2026, 18:13",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1055",
@@ -622,7 +636,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O poste permanece apagado durante a noite, deixando o trecho pouco iluminado.",
 		endereco: "Rua Monte Alegre, 215, Vossoroca",
 		data: "05/08/2026, 12:20",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1056",
@@ -631,7 +645,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A iluminação pública apresenta falhas e a lâmpada fica piscando constantemente.",
 		endereco: "Avenida São João, 228, Rio Acima",
 		data: "06/08/2026, 07:27",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1057",
@@ -640,7 +654,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há água escorrendo continuamente pela via, formando poças e deixando o pavimento escorregadio.",
 		endereco: "Rua Sorocaba, 241, Jardim Icatu",
 		data: "07/08/2026, 02:34",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1058",
@@ -649,7 +663,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Resíduos estão acumulados no local e precisam de recolhimento adequado.",
 		endereco: "Rua Paula Ney, 254, Itapeva",
 		data: "07/08/2026, 21:41",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1059",
@@ -658,7 +672,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Galhos baixos e danificados ocupam parte da passagem de pedestres.",
 		endereco: "Rua Antônio Fernandes, 267, Vila Garcia",
 		data: "08/08/2026, 16:48",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1060",
@@ -667,7 +681,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O bueiro está obstruído por resíduos e dificulta o escoamento da água da chuva.",
 		endereco: "Rua Sete de Setembro, 280, Jardim Archila",
 		data: "09/08/2026, 11:55",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1061",
@@ -676,7 +690,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há um buraco profundo no pavimento, dificultando a passagem de veículos e ciclistas.",
 		endereco: "Avenida Celso Miguel dos Santos, 293, Centro",
 		data: "10/08/2026, 07:02",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1062",
@@ -685,7 +699,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Trechos da calçada estão quebrados e dificultam a circulação segura de pedestres.",
 		endereco: "Rua Acácio Miller, 306, Vila Nova",
 		data: "11/08/2026, 02:09",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1063",
@@ -694,7 +708,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A placa está danificada e sua sinalização está difícil de identificar.",
 		endereco: "Rua Amazonas, 319, Jardim Vergueiro",
 		data: "11/08/2026, 20:16",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1064",
@@ -703,7 +717,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A pintura da faixa está desgastada, reduzindo a visibilidade para motoristas.",
 		endereco: "Rua da Chave, 332, Parque Bela Vista",
 		data: "12/08/2026, 15:23",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1065",
@@ -712,7 +726,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O poste permanece apagado durante a noite, deixando o trecho pouco iluminado.",
 		endereco: "Rua Projetada, 345, Vossoroca",
 		data: "13/08/2026, 10:30",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1066",
@@ -721,7 +735,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A iluminação pública apresenta falhas e a lâmpada fica piscando constantemente.",
 		endereco: "Rua Barão de Tatuí, 358, Rio Acima",
 		data: "14/08/2026, 05:37",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1067",
@@ -730,7 +744,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há água escorrendo continuamente pela via, formando poças e deixando o pavimento escorregadio.",
 		endereco: "Avenida 31 de Março, 371, Jardim Icatu",
 		data: "15/08/2026, 00:44",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1068",
@@ -739,7 +753,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Resíduos estão acumulados no local e precisam de recolhimento adequado.",
 		endereco: "Rua João Pessoa, 384, Itapeva",
 		data: "15/08/2026, 19:51",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1069",
@@ -748,7 +762,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Galhos baixos e danificados ocupam parte da passagem de pedestres.",
 		endereco: "Rua Albertina Nascimento, 397, Vila Garcia",
 		data: "16/08/2026, 14:58",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1070",
@@ -757,7 +771,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O bueiro está obstruído por resíduos e dificulta o escoamento da água da chuva.",
 		endereco: "Rua Monte Alegre, 410, Jardim Archila",
 		data: "17/08/2026, 10:05",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1071",
@@ -766,7 +780,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há um buraco profundo no pavimento, dificultando a passagem de veículos e ciclistas.",
 		endereco: "Avenida São João, 423, Centro",
 		data: "18/08/2026, 05:12",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1072",
@@ -775,7 +789,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Trechos da calçada estão quebrados e dificultam a circulação segura de pedestres.",
 		endereco: "Rua Sorocaba, 436, Vila Nova",
 		data: "18/08/2026, 23:19",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1073",
@@ -784,7 +798,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A placa está danificada e sua sinalização está difícil de identificar.",
 		endereco: "Rua Paula Ney, 449, Jardim Vergueiro",
 		data: "19/08/2026, 18:26",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1074",
@@ -793,7 +807,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A pintura da faixa está desgastada, reduzindo a visibilidade para motoristas.",
 		endereco: "Rua Antônio Fernandes, 462, Parque Bela Vista",
 		data: "20/08/2026, 13:33",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1075",
@@ -802,7 +816,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O poste permanece apagado durante a noite, deixando o trecho pouco iluminado.",
 		endereco: "Rua Sete de Setembro, 475, Vossoroca",
 		data: "21/08/2026, 08:40",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1076",
@@ -811,7 +825,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A iluminação pública apresenta falhas e a lâmpada fica piscando constantemente.",
 		endereco: "Avenida Celso Miguel dos Santos, 488, Rio Acima",
 		data: "22/08/2026, 03:47",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1077",
@@ -820,7 +834,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há água escorrendo continuamente pela via, formando poças e deixando o pavimento escorregadio.",
 		endereco: "Rua Acácio Miller, 501, Jardim Icatu",
 		data: "22/08/2026, 22:54",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1078",
@@ -829,7 +843,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Resíduos estão acumulados no local e precisam de recolhimento adequado.",
 		endereco: "Rua Amazonas, 514, Itapeva",
 		data: "23/08/2026, 18:01",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1079",
@@ -838,7 +852,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Galhos baixos e danificados ocupam parte da passagem de pedestres.",
 		endereco: "Rua da Chave, 527, Vila Garcia",
 		data: "24/08/2026, 13:08",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1080",
@@ -847,7 +861,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O bueiro está obstruído por resíduos e dificulta o escoamento da água da chuva.",
 		endereco: "Rua Projetada, 540, Jardim Archila",
 		data: "25/08/2026, 07:15",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1081",
@@ -856,7 +870,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há um buraco profundo no pavimento, dificultando a passagem de veículos e ciclistas.",
 		endereco: "Rua Barão de Tatuí, 553, Centro",
 		data: "26/08/2026, 02:22",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1082",
@@ -865,7 +879,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Trechos da calçada estão quebrados e dificultam a circulação segura de pedestres.",
 		endereco: "Avenida 31 de Março, 566, Vila Nova",
 		data: "26/08/2026, 21:29",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1083",
@@ -874,7 +888,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A placa está danificada e sua sinalização está difícil de identificar.",
 		endereco: "Rua João Pessoa, 579, Jardim Vergueiro",
 		data: "27/08/2026, 16:36",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1084",
@@ -883,7 +897,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A pintura da faixa está desgastada, reduzindo a visibilidade para motoristas.",
 		endereco: "Rua Albertina Nascimento, 592, Parque Bela Vista",
 		data: "28/08/2026, 11:43",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1085",
@@ -892,7 +906,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O poste permanece apagado durante a noite, deixando o trecho pouco iluminado.",
 		endereco: "Rua Monte Alegre, 605, Vossoroca",
 		data: "29/08/2026, 06:50",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1086",
@@ -901,7 +915,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A iluminação pública apresenta falhas e a lâmpada fica piscando constantemente.",
 		endereco: "Avenida São João, 618, Rio Acima",
 		data: "30/08/2026, 01:57",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1087",
@@ -910,7 +924,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há água escorrendo continuamente pela via, formando poças e deixando o pavimento escorregadio.",
 		endereco: "Rua Sorocaba, 631, Jardim Icatu",
 		data: "30/08/2026, 21:04",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1088",
@@ -919,7 +933,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Resíduos estão acumulados no local e precisam de recolhimento adequado.",
 		endereco: "Rua Paula Ney, 644, Itapeva",
 		data: "31/08/2026, 16:11",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1089",
@@ -928,7 +942,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Galhos baixos e danificados ocupam parte da passagem de pedestres.",
 		endereco: "Rua Antônio Fernandes, 657, Vila Garcia",
 		data: "01/09/2026, 10:18",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1090",
@@ -937,7 +951,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O bueiro está obstruído por resíduos e dificulta o escoamento da água da chuva.",
 		endereco: "Rua Sete de Setembro, 670, Jardim Archila",
 		data: "02/09/2026, 05:25",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1091",
@@ -946,7 +960,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há um buraco profundo no pavimento, dificultando a passagem de veículos e ciclistas.",
 		endereco: "Avenida Celso Miguel dos Santos, 683, Centro",
 		data: "03/09/2026, 00:32",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1092",
@@ -955,7 +969,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Trechos da calçada estão quebrados e dificultam a circulação segura de pedestres.",
 		endereco: "Rua Acácio Miller, 696, Vila Nova",
 		data: "03/09/2026, 19:39",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1093",
@@ -964,7 +978,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A placa está danificada e sua sinalização está difícil de identificar.",
 		endereco: "Rua Amazonas, 709, Jardim Vergueiro",
 		data: "04/09/2026, 14:46",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1094",
@@ -973,7 +987,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A pintura da faixa está desgastada, reduzindo a visibilidade para motoristas.",
 		endereco: "Rua da Chave, 722, Parque Bela Vista",
 		data: "05/09/2026, 09:53",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1095",
@@ -982,7 +996,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O poste permanece apagado durante a noite, deixando o trecho pouco iluminado.",
 		endereco: "Rua Projetada, 735, Vossoroca",
 		data: "06/09/2026, 05:00",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1096",
@@ -991,7 +1005,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "A iluminação pública apresenta falhas e a lâmpada fica piscando constantemente.",
 		endereco: "Rua Barão de Tatuí, 748, Rio Acima",
 		data: "07/09/2026, 00:07",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1097",
@@ -1000,7 +1014,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Há água escorrendo continuamente pela via, formando poças e deixando o pavimento escorregadio.",
 		endereco: "Avenida 31 de Março, 761, Jardim Icatu",
 		data: "07/09/2026, 19:14",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 	{
 		id: "1098",
@@ -1009,7 +1023,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Resíduos estão acumulados no local e precisam de recolhimento adequado.",
 		endereco: "Rua João Pessoa, 774, Itapeva",
 		data: "08/09/2026, 13:21",
-		status: "Resolvido",
+		status: "Concluída",
 	},
 	{
 		id: "1099",
@@ -1018,7 +1032,7 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "Galhos baixos e danificados ocupam parte da passagem de pedestres.",
 		endereco: "Rua Albertina Nascimento, 787, Vila Garcia",
 		data: "09/09/2026, 08:28",
-		status: "Pendente",
+		status: "Recebida",
 	},
 	{
 		id: "1100",
@@ -1027,6 +1041,6 @@ export const denunciasIniciais: Denuncia[] = [
 		descricao: "O bueiro está obstruído por resíduos e dificulta o escoamento da água da chuva.",
 		endereco: "Rua Monte Alegre, 800, Jardim Archila",
 		data: "10/09/2026, 03:35",
-		status: "Em andamento",
+		status: "Em execução",
 	},
 ];

@@ -7,12 +7,13 @@ import LayoutUser from "../PaginaUser/LayoutUser";
 export default function CadastroDenunciasUser() {
     const {
         campos,
-        arquivo,
+        arquivos,
         mensagem,
         mensagemSucesso,
         chaveInputArquivo,
         atualizarCampo,
         selecionarArquivo,
+        removerArquivo,
         limparFormulario,
         cadastrarDenuncia,
     } = useCadastroDenuncia();
@@ -135,20 +136,36 @@ export default function CadastroDenunciasUser() {
             </label>
 
             <label className="block text-sm font-semibold text-slate-700">
-                Anexo de mídia (JPEG ou PNG, até 2 MB)
+                Fotos do local (até 4, JPEG ou PNG, até 2 MB cada)
                 <input
                     key={chaveInputArquivo}
                     type="file"
                     accept="image/jpeg,image/png"
+                    multiple
                     onChange={selecionarArquivo}
                     className="mt-2 block w-full rounded-lg border border-slate-300 p-2 text-sm font-normal"
                 />
-                {arquivo && (
-                    <span className="mt-1 block text-xs text-slate-500">
-                        {arquivo.name}
-                    </span>
-                )}
             </label>
+            {arquivos.length > 0 && (
+                <ul className="flex flex-wrap gap-2">
+                    {arquivos.map((item, indice) => (
+                        <li
+                            key={`${item.name}-${indice}`}
+                            className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 py-1 pl-3 pr-1 text-xs text-slate-700"
+                        >
+                            {item.name}
+                            <button
+                                type="button"
+                                onClick={() => removerArquivo(indice)}
+                                aria-label={`Remover ${item.name}`}
+                                className="rounded-full px-2 py-0.5 text-slate-500 hover:bg-slate-200"
+                            >
+                                ×
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            )}
 
             {mensagem && (
                 <p
