@@ -6,6 +6,9 @@ import { contasAdministrativasDemonstracao } from "../../../LoginADM/contasDemon
 import useRegistro from "../../../hooks/Cadastro/useRegistro";
 import "./../../../Style/Registro.css";
 
+
+import Chat from './../../../Components/chat/Chat'
+
 export default function Registro() {
     const {
         ehLogin,
@@ -103,6 +106,7 @@ export default function Registro() {
                     </div>
                 </section>
             </main>
+            <Chat/>
             <Footer />
         </div>
     );

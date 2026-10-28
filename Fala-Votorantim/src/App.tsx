@@ -33,6 +33,10 @@ import FeedDenunciasUser from './Pages/PaginaUser/FeedDenuncias/FeedDenuncias'
 
 import CadastroDenuncias from './Pages/CadastroDenuncias/CadastroDenunciasUser'
 
+
+{/* Chat do Fala Votorantim */}
+import Chat from './Components/chat/Chat'
+
 export default function App() {
   return (
     <MemoryRouter>
@@ -69,6 +73,8 @@ export default function App() {
 
         
       </Routes>
+
+      <Chat/>
     </MemoryRouter>
   )
 }
