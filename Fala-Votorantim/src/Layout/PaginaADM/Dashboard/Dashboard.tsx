@@ -1,44 +1,10 @@
 import NavegacaoADM from "../NavegacaoADM";
+import ResumoDenuncias from "../../FeedDenuncias/ResumoDenuncias";
 import useDashboardADM from "../../../hooks/Denuncias/useDashboardADM";
-
-function CartaoIndicador({
-    titulo,
-    valor,
-    descricao,
-}: {
-    titulo: string;
-    valor: number;
-    descricao: string;
-}) {
-    return (
-        <article className="rounded-xl border border-[#D9E4F5] bg-white p-5 shadow-sm">
-            <div className="flex items-start justify-between gap-3">
-                <div>
-                    <p className="text-sm font-medium text-[#6A7282]">
-                        {titulo}
-                    </p>
-
-                    <p className="mt-3 text-3xl font-bold text-[#1E2939]">
-                        {valor}
-                    </p>
-                </div>
-
-                <div
-                    className={"flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-xl"}
-                    aria-hidden="true"
-                >
-                </div>
-            </div>
-
-            <p className="mt-3 text-xs text-[#6A7282]">
-                {descricao}
-            </p>
-        </article>
-    );
-}
 
 export default function Dashboard() {
     const {
+        denuncias,
         indicadores,
         maiorQuantidadeCategoria,
         mensagemErro,
@@ -78,31 +44,7 @@ export default function Dashboard() {
                             </h2>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                            <CartaoIndicador
-                                titulo="Total de denúncias"
-                                valor={indicadores.total}
-                                descricao="Todos os registros disponíveis"
-                            />
-
-                            <CartaoIndicador
-                                titulo="Pendentes"
-                                valor={indicadores.pendentes}
-                                descricao="Aguardando atendimento"
-                            />
-
-                            <CartaoIndicador
-                                titulo="Em andamento"
-                                valor={indicadores.andamento}
-                                descricao="Em análise ou atendimento"
-                            />
-
-                            <CartaoIndicador
-                                titulo="Concluídas"
-                                valor={indicadores.concluidas}
-                                descricao="Resolvidas ou finalizadas"
-                            />
-                        </div>
+                        <ResumoDenuncias denuncias={denuncias} />
                     </section>
 
                     <section className="grid grid-cols-1 gap-6 xl:grid-cols-2">
