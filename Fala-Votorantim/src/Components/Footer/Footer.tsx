@@ -17,7 +17,7 @@ export default function Footer() {
         <div>
           <NavLink to="/">
             <img
-              src={`${base}Logo.png`}
+              src={`${base}simbolo-branco.svg`}
               alt="Logo do Fala Votorantim"
               className="h-14 w-14 rounded-full object-cover"
             />
