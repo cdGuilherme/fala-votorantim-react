@@ -16,7 +16,7 @@ export default function Hero() {
             />
 
             <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 px-6 py-28 text-center md:py-36">
-                <span className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
+                <span className="">
                     Canal de participação cidadã de Votorantim
                 </span>
 
@@ -55,5 +55,6 @@ export default function Hero() {
                 </ul>
             </div>
         </section>
+        
     )
 }

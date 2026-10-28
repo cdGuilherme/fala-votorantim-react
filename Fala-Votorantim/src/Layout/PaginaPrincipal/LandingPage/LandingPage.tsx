@@ -12,7 +12,6 @@ export default function LandingPage() {
         <div>
             <NavegacaoPublica />
             <Hero />
-            <Beneficios />
             <ComoFunciona />
             <PequenasAcoes />
             <SobreNos />
