@@ -55,6 +55,29 @@ export const corStatus: Record<Status, string> = {
 	Resolvido: "#00A63E",
 };
 
+// Foto ilustrativa por categoria (créditos em public/denuncias/CREDITOS.md).
+const fotosCategoria: Record<string, string> = {
+	Buracos: "buraco",
+	"Problemas em vias públicas": "buraco",
+	"Calçadas danificadas": "calcada",
+	"Sinalização quebrada": "sinalizacao",
+	"Postes apagados": "iluminacao",
+	"Falta de iluminação": "iluminacao",
+	"Problemas elétricos urbanos": "iluminacao",
+	"Lixo acumulado": "lixo",
+	"Entulho irregular": "entulho",
+	"Terrenos abandonados": "terreno",
+	"Vazamentos de água": "vazamento",
+	Esgoto: "vazamento",
+};
+
+// A foto enviada pelo munícipe tem prioridade sobre a ilustrativa.
+export function imagemDenuncia(denuncia: Denuncia): string {
+	if (denuncia.anexoDataUrl?.startsWith("data:image/")) return denuncia.anexoDataUrl;
+	const foto = fotosCategoria[denuncia.categoria] ?? "buraco";
+	return `${import.meta.env.BASE_URL}denuncias/${foto}.jpg`;
+}
+
 export const denunciasIniciais: Denuncia[] = [
 	{
 		id: "1001",

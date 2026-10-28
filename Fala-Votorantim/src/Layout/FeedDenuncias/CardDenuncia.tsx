@@ -2,7 +2,7 @@
 // O feed do usuário passa as ações de favoritar/salvar; o feed do ADM passa onAbrir.
 
 import type { Denuncia } from "./types";
-import { corStatus, estilosStatus } from "./dadosDenuncias";
+import { corStatus, estilosStatus, imagemDenuncia } from "./dadosDenuncias";
 
 export type AcoesCard = {
   favorita: boolean;
@@ -46,99 +46,109 @@ export default function CardDenuncia({
 }: CardDenunciaProps) {
   return (
     <article
-      className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white p-5 pl-6 transition hover:border-[#BEDBFF] hover:shadow-lg hover:shadow-[#1447E6]/5 sm:p-6 sm:pl-7"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white transition hover:border-[#BEDBFF] hover:shadow-lg hover:shadow-[#1447E6]/5 sm:flex-row"
     >
-      {/* Faixa lateral com a cor do status */}
-      <span
-        className="absolute inset-y-0 left-0 w-1.5"
-        style={{ backgroundColor: corStatus[denuncia.status] }}
-        aria-hidden="true"
-      />
-
-      {/* Status, categoria e código */}
-      <div className="flex flex-wrap items-center gap-2">
+      {/* Foto com a faixa da cor do status */}
+      <div className="relative h-44 shrink-0 overflow-hidden bg-[#F3F4F6] sm:h-auto sm:w-56">
+        <img
+          src={imagemDenuncia(denuncia)}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
         <span
-          className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${estilosStatus[denuncia.status]}`}
-        >
-          <span
-            className="h-1.5 w-1.5 rounded-full"
-            style={{ backgroundColor: corStatus[denuncia.status] }}
-          />
-          {denuncia.status}
-        </span>
-
-        <span className="rounded-full bg-[#F3F4F6] px-3 py-1 text-xs font-medium text-[#364153]">
-          {denuncia.categoria}
-        </span>
-
-        <span className="ml-auto text-xs font-medium text-[#99A1AF]">
-          #{denuncia.id}
-        </span>
+          className="absolute inset-x-0 bottom-0 h-1.5 sm:inset-y-0 sm:left-auto sm:right-0 sm:h-auto sm:w-1.5"
+          style={{ backgroundColor: corStatus[denuncia.status] }}
+          aria-hidden="true"
+        />
       </div>
 
-      {/* Título e descrição */}
-      <h3 className="text-lg font-semibold leading-snug text-[#1E2939]">
-        {denuncia.titulo}
-      </h3>
-
-      <p className="line-clamp-3 text-sm leading-relaxed text-[#4A5565]">
-        {denuncia.descricao}
-      </p>
-
-      {/* Local, data e ações */}
-      <div className="mt-1 flex flex-col gap-3 border-t border-[#F3F4F6] pt-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-1 text-sm text-[#6A7282] sm:flex-row sm:gap-5">
-          <span className="flex items-center gap-1.5">
-            <Icone d={iconeLocal} />
-            {denuncia.endereco}
+      <div className="flex min-w-0 flex-1 flex-col gap-3 p-5 sm:p-6">
+        {/* Status, categoria e código */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${estilosStatus[denuncia.status]}`}
+          >
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ backgroundColor: corStatus[denuncia.status] }}
+            />
+            {denuncia.status}
           </span>
-          <span className="flex items-center gap-1.5">
-            <Icone d={iconeData} />
-            {denuncia.data}
+
+          <span className="rounded-full bg-[#F3F4F6] px-3 py-1 text-xs font-medium text-[#364153]">
+            {denuncia.categoria}
+          </span>
+
+          <span className="ml-auto text-xs font-medium text-[#99A1AF]">
+            #{denuncia.id}
           </span>
         </div>
 
-        {acoes && (
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={acoes.onFavoritar}
-              aria-pressed={acoes.favorita}
-              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
-                acoes.favorita
-                  ? "border-[#FDE68A] bg-[#FEFCE8] text-[#A65F00]"
-                  : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
-              }`}
-            >
-              <Icone d={iconeEstrela} cheio={acoes.favorita} />
-              {acoes.favorita ? "Favoritada" : "Favoritar"}
-            </button>
-            <button
-              type="button"
-              onClick={acoes.onSalvar}
-              aria-pressed={acoes.salva}
-              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
-                acoes.salva
-                  ? "border-[#BEDBFF] bg-[#EFF6FF] text-[#1447E6]"
-                  : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
-              }`}
-            >
-              <Icone d={iconeSalvar} cheio={acoes.salva} />
-              {acoes.salva ? "Salva" : "Salvar"}
-            </button>
-          </div>
-        )}
+        {/* Título e descrição */}
+        <h3 className="text-lg font-semibold leading-snug text-[#1E2939]">
+          {denuncia.titulo}
+        </h3>
 
-        {onAbrir && (
-          <button
-            type="button"
-            onClick={onAbrir}
-            className="flex items-center justify-center gap-1.5 rounded-lg bg-[#1447E6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#193CB8]"
-          >
-            Ver e gerenciar
-            <span aria-hidden="true">→</span>
-          </button>
-        )}
+        <p className="line-clamp-3 text-sm leading-relaxed text-[#4A5565]">
+          {denuncia.descricao}
+        </p>
+
+        {/* Local, data e ações */}
+        <div className="mt-1 flex flex-col gap-3 border-t border-[#F3F4F6] pt-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-1 text-sm text-[#6A7282] sm:flex-row sm:gap-5">
+            <span className="flex items-center gap-1.5">
+              <Icone d={iconeLocal} />
+              {denuncia.endereco}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Icone d={iconeData} />
+              {denuncia.data}
+            </span>
+          </div>
+
+          {acoes && (
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={acoes.onFavoritar}
+                aria-pressed={acoes.favorita}
+                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
+                  acoes.favorita
+                    ? "border-[#FDE68A] bg-[#FEFCE8] text-[#A65F00]"
+                    : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
+                }`}
+              >
+                <Icone d={iconeEstrela} cheio={acoes.favorita} />
+                {acoes.favorita ? "Favoritada" : "Favoritar"}
+              </button>
+              <button
+                type="button"
+                onClick={acoes.onSalvar}
+                aria-pressed={acoes.salva}
+                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
+                  acoes.salva
+                    ? "border-[#BEDBFF] bg-[#EFF6FF] text-[#1447E6]"
+                    : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
+                }`}
+              >
+                <Icone d={iconeSalvar} cheio={acoes.salva} />
+                {acoes.salva ? "Salva" : "Salvar"}
+              </button>
+            </div>
+          )}
+
+          {onAbrir && (
+            <button
+              type="button"
+              onClick={onAbrir}
+              className="flex items-center justify-center gap-1.5 rounded-lg bg-[#1447E6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#193CB8]"
+            >
+              Ver e gerenciar
+              <span aria-hidden="true">→</span>
+            </button>
+          )}
+        </div>
       </div>
     </article>
   );

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Denuncia, Status } from "./types";
-import { corStatus, estilosStatus, statusDisponiveis } from "./dadosDenuncias";
+import { corStatus, estilosStatus, imagemDenuncia, statusDisponiveis } from "./dadosDenuncias";
 
 type DetalheDenunciaProps = {
     denuncia: Denuncia;
@@ -84,6 +84,13 @@ export default function DetalheDenuncia({
                 </header>
 
                 <div className="flex flex-col gap-6 px-6 py-6">
+                    {!isImagem && (
+                        <img
+                            src={imagemDenuncia(denuncia)}
+                            alt="Imagem ilustrativa da categoria"
+                            className="h-56 w-full rounded-xl object-cover"
+                        />
+                    )}
                     <div className="flex flex-wrap gap-2">
                         <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${estilosStatus[denuncia.status]}`}>
                             <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: corStatus[denuncia.status] }} />
