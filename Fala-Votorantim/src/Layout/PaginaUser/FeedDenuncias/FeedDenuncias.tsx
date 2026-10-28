@@ -8,7 +8,7 @@ import useFeedDenuncias from "../../../hooks/Denuncias/useFeedDenuncias";
 import useInteracoesDenuncias from "../../../hooks/Denuncias/useInteracoesDenuncias";
 import useSessao from "../../../hooks/useSessao";
 
-type Aba = "todas" | "favoritas" | "salvas";
+type Aba = "todas" | "favoritas";
 
 export default function FeedDenuncias() {
     const {
@@ -36,25 +36,22 @@ export default function FeedDenuncias() {
     const denunciaAberta = denuncias.find((d) => d.id === idAberta);
     const fecharDetalhe = useCallback(() => setIdAberta(null), []);
     const { sessao } = useSessao();
-    const { favoritas, salvas, alternarFavorita, alternarSalva } =
+    const { favoritas, alternarFavorita } =
         useInteracoesDenuncias(sessao?.email);
     const [aba, setAba] = useState<Aba>("todas");
 
     const abas: { id: Aba; label: string; total: number }[] = [
         { id: "todas", label: "Todas", total: filtradas.length },
         { id: "favoritas", label: "Favoritas", total: filtradas.filter((d) => favoritas.includes(d.id)).length },
-        { id: "salvas", label: "Salvas", total: filtradas.filter((d) => salvas.includes(d.id)).length },
     ];
 
     const visiveis =
         aba === "favoritas"
             ? filtradas.filter((d) => favoritas.includes(d.id))
-            : aba === "salvas"
-              ? filtradas.filter((d) => salvas.includes(d.id))
-              : filtradas;
+            : filtradas;
 
     return (
-        <LayoutUser titulo="Feed de Denúncias" subtitulo="Favorite e salve denúncias">
+        <LayoutUser titulo="Feed de Denúncias" subtitulo="Favorite denúncias para acompanhá-las">
 
             <ResumoDenuncias denuncias={denuncias} />
 
@@ -108,16 +105,12 @@ export default function FeedDenuncias() {
                 denuncias={visiveis}
                 acoesPara={(denuncia) => ({
                     favorita: favoritas.includes(denuncia.id),
-                    salva: salvas.includes(denuncia.id),
                     onFavoritar: () => alternarFavorita(denuncia.id),
-                    onSalvar: () => alternarSalva(denuncia.id),
                 })}
                 mensagemVazia={
                     aba === "favoritas"
                         ? "Você ainda não favoritou nenhuma denúncia com esses filtros."
-                        : aba === "salvas"
-                          ? "Você ainda não salvou nenhuma denúncia com esses filtros."
-                          : "Tente alterar os filtros da pesquisa."
+                        : "Tente alterar os filtros da pesquisa."
                 }
                 onAbrir={(denuncia) => setIdAberta(denuncia.id)}
                 rotuloAbrir="Ver detalhes"

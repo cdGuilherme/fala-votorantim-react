@@ -7,9 +7,9 @@ import useSessao from "../../../hooks/useSessao";
 import useDenuncias from "../../../hooks/Denuncias/useDenuncias";
 import useInteracoesDenuncias from "../../../hooks/Denuncias/useInteracoesDenuncias";
 
-// Caso de uso "Acompanhar Denúncias": denúncias feitas pelo usuário e denúncias salvas.
+// Caso de uso "Acompanhar Denúncias": denúncias feitas pelo usuário e denúncias salvas (favoritas).
 
-type Aba = "minhas" | "salvas" | "favoritas";
+type Aba = "minhas" | "favoritas";
 
 export default function MinhasDenuncias() {
     const { sessao } = useSessao();
@@ -17,25 +17,22 @@ export default function MinhasDenuncias() {
     const [idAberta, setIdAberta] = useState<string | null>(null);
     const denunciaAberta = denuncias.find((d) => d.id === idAberta);
     const fecharDetalhe = useCallback(() => setIdAberta(null), []);
-    const { favoritas, salvas, alternarFavorita, alternarSalva } =
+    const { favoritas, alternarFavorita } =
         useInteracoesDenuncias(sessao?.email);
     const [aba, setAba] = useState<Aba>("minhas");
 
     const listas: Record<Aba, typeof denuncias> = {
         minhas: denuncias.filter((d) => d.autorEmail === sessao?.email),
-        salvas: denuncias.filter((d) => salvas.includes(d.id)),
         favoritas: denuncias.filter((d) => favoritas.includes(d.id)),
     };
 
     const abas: { id: Aba; label: string }[] = [
         { id: "minhas", label: "Feitas por mim" },
-        { id: "salvas", label: "Salvas" },
         { id: "favoritas", label: "Favoritas" },
     ];
 
     const vazias: Record<Aba, string> = {
         minhas: "Você ainda não cadastrou nenhuma denúncia.",
-        salvas: "Salve denúncias no feed para acompanhá-las aqui.",
         favoritas: "Favorite denúncias no feed para encontrá-las aqui.",
     };
 
@@ -75,9 +72,7 @@ export default function MinhasDenuncias() {
                 denuncias={listas[aba]}
                 acoesPara={(denuncia) => ({
                     favorita: favoritas.includes(denuncia.id),
-                    salva: salvas.includes(denuncia.id),
                     onFavoritar: () => alternarFavorita(denuncia.id),
-                    onSalvar: () => alternarSalva(denuncia.id),
                 })}
                 onAbrir={(denuncia) => setIdAberta(denuncia.id)}
                 rotuloAbrir="Ver detalhes"

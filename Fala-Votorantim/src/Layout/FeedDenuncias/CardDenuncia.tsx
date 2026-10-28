@@ -1,14 +1,12 @@
 // Apresentar os dados, a categoria e o status de cada denúncia.
-// O feed do usuário passa as ações de favoritar/salvar; o feed do ADM passa onAbrir.
+// O feed do usuário passa a ação de favoritar; o feed do ADM passa onAbrir.
 
 import type { Denuncia } from "./types";
 import { corStatus, estilosStatus, imagemDenuncia } from "./dadosDenuncias";
 
 export type AcoesCard = {
   favorita: boolean;
-  salva: boolean;
   onFavoritar: () => void;
-  onSalvar: () => void;
 };
 
 type CardDenunciaProps = {
@@ -38,7 +36,6 @@ function Icone({ d, cheio }: { d: string; cheio?: boolean }) {
 const iconeLocal = "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Zm0-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z";
 const iconeData = "M8 3v3m8-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z";
 const iconeEstrela = "m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9L12 3Z";
-const iconeSalvar = "M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z";
 
 export default function CardDenuncia({
   denuncia,
@@ -128,19 +125,6 @@ export default function CardDenuncia({
               >
                 <Icone d={iconeEstrela} cheio={acoes.favorita} />
                 {acoes.favorita ? "Favoritada" : "Favoritar"}
-              </button>
-              <button
-                type="button"
-                onClick={acoes.onSalvar}
-                aria-pressed={acoes.salva}
-                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
-                  acoes.salva
-                    ? "border-[#BEDBFF] bg-[#EFF6FF] text-[#1447E6]"
-                    : "border-[#E5E7EB] text-[#4A5565] hover:bg-[#F9FAFB]"
-                }`}
-              >
-                <Icone d={iconeSalvar} cheio={acoes.salva} />
-                {acoes.salva ? "Salva" : "Salvar"}
               </button>
             </div>
           )}
