@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 
-const destaques = ["Seguro e anônimo", "Sem burocracia", "De qualquer dispositivo"]
 
 export default function Hero() {
     return(
