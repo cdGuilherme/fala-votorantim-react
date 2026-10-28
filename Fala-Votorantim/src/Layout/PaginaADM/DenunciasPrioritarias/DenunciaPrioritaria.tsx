@@ -36,13 +36,13 @@ export default function DenunciasPrioritarias() {
                         </p>
                     )}
                     <header>
-                        <p className="text-sm font-medium text-[#A65F00]">
-                            Administração
-                        </p>
-
                         <h1 className="mt-1 text-2xl font-bold text-[#1E2939] sm:text-3xl">
                             Denúncias Prioritárias
                         </h1>
+
+                        <p className="text-sm font-medium text-[#155DFC]">
+                            Administração
+                        </p>
                     </header>
 
                     <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
