@@ -21,12 +21,15 @@ export default function Header({
     return (
         <header className="relative z-50 w-full bg-gradient-to-r from-[#1447E6] to-[#193CB8]">
             <div className="mx-auto flex min-h-[10vh] items-center justify-between px-5">
-                <NavLink to="/" className="shrink-0">
+                <NavLink to="/" className="flex shrink-0 items-center gap-3">
                     <img
                         src={`${import.meta.env.BASE_URL}simbolo-branco.svg`}
-                        alt="Logo do Fala Votorantim"
-                        className="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12"
+                        alt=""
+                        className="h-10 w-10 object-contain sm:h-12 sm:w-12"
                     />
+                    <span className="text-lg font-bold tracking-tight text-white sm:text-xl">
+                        Fala Votorantim
+                    </span>
                 </NavLink>
 
                 <nav className="hidden items-center gap-4 md:flex lg:gap-8">
