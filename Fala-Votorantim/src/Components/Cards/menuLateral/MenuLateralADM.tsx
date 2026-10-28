@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import logo from "./../../../assets/marrom.png";
+import logo from "./../../../../public/simbolo-branco.svg";
 
 type MenuLateralADMProps = {
     menuAberto: boolean;
