@@ -1,11 +1,5 @@
-import Header from "../../../Components/Header/Header";
-import Footer from "../../../Components/Footer/Footer";
+import SobreNos from "../../../Layout/PaginaPrincipal/SobreNos/SobreNos";
 
-export default function Sobre() {
-    return(
-        <div>
-            <Header/>
-            <Footer/>
-        </div>
-    )
+export default function SobreNosPage() {
+    return <SobreNos />;
 }

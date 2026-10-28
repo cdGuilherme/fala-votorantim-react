@@ -1,8 +1,10 @@
+import TelaInicialUsers from './../../../Layout/PaginaUser/TelaInicialUser/TelaInicialUser'
+
 function TelaInicialUser()
 {
-    return(<>
-    
-    </>)
+    return(
+        <TelaInicialUsers/>
+    )
 }
 
 export default TelaInicialUser;

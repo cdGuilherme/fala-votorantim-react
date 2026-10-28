@@ -14,6 +14,11 @@ import Registro from './Pages/PaginaPrincipal/Registro/Registro'
 import TelaInicialADM from './Pages/PaginaADM/TelaInicial/TelaInicial'
 import DashboardADM from './Pages/PaginaADM/Dashboard/Dashboard'
 import FeedDenunciasADM from './Pages/PaginaADM/FeedDenuncias/FeedDenuncias'
+import CadastroDenunciasADM from './Pages/PaginaADM/CadastroDenuncia/CadastroDenuncia'
+import DenunciasPrioritarias from './Pages/PaginaADM/DenunciasPrioritarias/DenunciaPrioritaria'
+import RelatoriosEstatisticasADM from './Pages/PaginaADM/Relatorio/Relatorio'
+import UsuariosPermissoesADM from './Pages/PaginaADM/PermissaoUser/Permissao'
+import ConfiguracoesADM from './Pages/PaginaADM/configuracoes/config'
 
 
 {/* Users */}
@@ -22,17 +27,13 @@ import TelaInicialUser from './Pages/PaginaUser/TelaInicialUser/TelaInicialUser'
 import MeusDados from './Pages/PaginaUser/MeusDados/MeusDados'
 import Notificacoes from './Pages/PaginaUser/Notificacoes/Notificacoes'
 import MinhasDenuncias from './Pages/PaginaUser/MinhasDenuncias/MinhasDenuncias'
+import FeedDenunciasUser from './Pages/PaginaUser/FeedDenuncias/FeedDenuncias'
 
 {/* em Comum entre eles */}
 
 import CadastroDenuncias from './Pages/CadastroDenuncias/CadastroDenunciasUser'
 
-
-
-
-function App() {
-
-
+export default function App() {
   return (
     <MemoryRouter>
       <Routes>
@@ -43,18 +44,25 @@ function App() {
         <Route path='/Feed' element={<FeedDenuncia/>} />
         <Route path='/Registro' element={<Registro />}/>
 
-        {/*ADM */}
+        {/* ADM */}
 
         <Route path='/adm/TelaInicial' element={<TelaInicialADM/>}/>
         <Route path='/adm/Dashboard' element={<DashboardADM/>}/>
         <Route path='/adm/FeedDenuncias' element={<FeedDenunciasADM/>}/>
+        <Route path='/adm/CadastroDenuncias' element={<CadastroDenunciasADM/>}/>
+        <Route path='/adm/DenunciasPrioritarias' element={<DenunciasPrioritarias/>}/>
+        <Route path='/adm/RelatoriosEstatisticas' element={<RelatoriosEstatisticasADM/>}/>
+        <Route path='/adm/UsuariosPermissoes' element={<UsuariosPermissoesADM/>}/>
+        <Route path='/adm/Configuracoes' element={<ConfiguracoesADM/>}/>
         
         {/* Users */}
 
+        <Route path='/users/TelaInicial' element={<TelaInicialUser/>}/>
         <Route path='/users/TeleInicial' element={<TelaInicialUser/>}/>
         <Route path='/users/MeusDados' element={<MeusDados />}/>
         <Route path='/users/notificacoes' element={<Notificacoes/>}/>
         <Route path='/users/MinhasDenuncias' element={<MinhasDenuncias/>}/>
+        <Route path='/users/FeedDenunciasUser' element={<FeedDenunciasUser/>}/>
 
         {/*em comum entre eles */}
         <Route path='/CadastroDenuncia' element={<CadastroDenuncias/>}/>
@@ -64,5 +72,3 @@ function App() {
     </MemoryRouter>
   )
 }
-
-export default App

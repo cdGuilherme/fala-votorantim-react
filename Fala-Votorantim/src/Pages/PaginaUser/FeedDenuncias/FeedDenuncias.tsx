@@ -1,7 +1,5 @@
-function FeedDenuncias()
-{
-    return(<>
-    </>)
-}
+import FeedDenuncias from "../../../Layout/PaginaUser/FeedDenuncias/FeedDenuncias";
 
-export default FeedDenuncias;
+export default function FeedDenunciasPage() {
+    return <FeedDenuncias />;
+}

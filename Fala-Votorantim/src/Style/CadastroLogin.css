@@ -1,0 +1,109 @@
+@import './Variaveis.css';
+
+.divLogin,
+.divCadastro
+{
+    width: 100%;
+    max-width: 22rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.divLogin h3,
+.divCadastro h3
+{
+    margin: 0 0 1.5rem;
+    text-align: center;
+    color: var(--cor-preta);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.divLogin label,
+.divCadastro label
+{
+    margin-bottom: 0.35rem;
+    color: var(--detalhe-cinza);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.divLogin input,
+.divCadastro input
+{
+    width: 100%;
+    height: 2.75rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.75rem;
+    box-sizing: border-box;
+    border: 0.0625rem solid var(--cor-cinza);
+    border-radius: 0.5rem;
+    background: var(--cor-branco);
+    color: var(--cor-preta);
+    font-family: inherit;
+    font-size: 0.875rem;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.divLogin input::placeholder,
+.divCadastro input::placeholder
+{
+    color: var(--cor-cinza);
+}
+
+.divLogin input:focus,
+.divCadastro input:focus
+{
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 0.15rem var(--fundo-azul-claro);
+}
+
+.btnEntrar,
+.btnCadastrar
+{
+    width: 100%;
+    height: 2.75rem;
+    margin-top: 0.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--cor-principal);
+    color: var(--cor-branco);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btnEntrar:hover,
+.btnCadastrar:hover
+{
+    background: var(--cor-principal-escura);
+    transform: translateY(-0.0625rem);
+}
+
+.btnEntrar:active,
+.btnCadastrar:active
+{
+    transform: translateY(0);
+}
+
+@media (max-width: 40rem)
+{
+    .divLogin,
+    .divCadastro
+    {
+        max-width: none;
+    }
+
+    .divLogin h3,
+    .divCadastro h3
+    {
+        font-size: 1.3rem;
+        margin-bottom: 1.25rem;
+    }
+}

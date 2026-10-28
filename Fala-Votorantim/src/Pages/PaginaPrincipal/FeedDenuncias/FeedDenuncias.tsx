@@ -1,11 +1,5 @@
-import Header from "../../../Components/Header/Header";
-import Footer from "../../../Components/Footer/Footer";
+import FeedDenuncias from "../../../Layout/PaginaPrincipal/FeedDenuncias/FeedDenuncias";
 
-export default function Feed() {
-    return(
-        <div>
-            <Header/>
-            <Footer/>
-        </div>
-    )
+export default function FeedDenunciasPage() {
+    return <FeedDenuncias />;
 }
