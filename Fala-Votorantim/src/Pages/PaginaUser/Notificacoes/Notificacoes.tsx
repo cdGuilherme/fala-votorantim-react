@@ -1,8 +1,5 @@
-function Notificacoes()
-{
-    return(<>
-    
-    </>)
-}
+import Notificacoes from "../../../Layout/PaginaUser/Notificacoes/Notificacoes";
 
-export default Notificacoes;
+export default function NotificacoesPage() {
+    return <Notificacoes />;
+}

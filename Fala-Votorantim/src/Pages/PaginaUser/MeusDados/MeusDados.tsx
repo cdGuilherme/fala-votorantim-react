@@ -1,8 +1,5 @@
-function MeusDados()
-{
-    return(<>
-    
-    </>)
-}
+import MeusDados from "../../../Layout/PaginaUser/MeusDados/MeusDados";
 
-export default MeusDados;
+export default function MeusDadosPage() {
+    return <MeusDados />;
+}

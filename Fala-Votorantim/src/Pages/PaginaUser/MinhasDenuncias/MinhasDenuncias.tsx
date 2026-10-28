@@ -1,8 +1,5 @@
-function MinhasDenuncias()
-{
-    return(<>
-    
-    </>)
-}
+import MinhasDenuncias from "../../../Layout/PaginaUser/MinhasDenuncias/MinhasDenuncias";
 
-export default MinhasDenuncias;
+export default function MinhasDenunciasPage() {
+    return <MinhasDenuncias />;
+}
