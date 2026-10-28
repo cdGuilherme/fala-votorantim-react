@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { ChangeEvent } from "react";
 import useDenuncias from "./useDenuncias";
+import useSessao from "../useSessao";
 import type { Denuncia } from "../../Layout/FeedDenuncias/types";
 
 export type CamposDenuncia = {
@@ -58,6 +59,7 @@ export default function useCadastroDenuncia() {
         adicionarDenuncia,
         mensagemErro: erroArmazenamentoInicial,
     } = useDenuncias();
+    const { sessao } = useSessao();
     const [campos, setCampos] = useState<CamposDenuncia>(camposVazios);
     const [arquivo, setArquivo] = useState<File | null>(null);
     const [mensagem, setMensagem] = useState(erroArmazenamentoInicial);
@@ -152,6 +154,7 @@ export default function useCadastroDenuncia() {
                 complemento: campos.complemento.trim(),
                 bairro: campos.bairro.trim(),
                 resultadoEsperado: campos.resultadoEsperado.trim(),
+                ...(sessao ? { autorEmail: sessao.email } : {}),
                 ...(arquivo
                     ? {
                           anexoNome: arquivo.name,

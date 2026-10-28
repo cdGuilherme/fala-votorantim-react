@@ -17,6 +17,7 @@ export type Denuncia = {
   resultadoEsperado?: string;
   anexoNome?: string;
   anexoDataUrl?: string;
+  autorEmail?: string;
 };
 
 export type GrupoCategoria = {

@@ -7,6 +7,7 @@ type Usuario = {
     email: string;
     telefone: string;
     senha: string;
+    desativada?: boolean;
 };
 
 type Sessao = {
@@ -166,6 +167,11 @@ export default function useCadastroLogin() {
 
             if (!usuario) {
                 definirMensagem("E-mail ou senha incorretos.");
+                return;
+            }
+
+            if (usuario.desativada) {
+                definirMensagem("Esta conta está desativada.");
                 return;
             }
 

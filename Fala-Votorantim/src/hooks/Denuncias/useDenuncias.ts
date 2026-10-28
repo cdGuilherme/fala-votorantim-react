@@ -3,6 +3,7 @@ import {
     denunciasIniciais,
     statusDisponiveis,
 } from "../../Layout/FeedDenuncias/dadosDenuncias";
+import { registrarNotificacao } from "./notificacoes";
 import type { Denuncia, Status } from "../../Layout/FeedDenuncias/types";
 
 const chaveDenuncias = "fala-votorantim-denuncias";
@@ -110,6 +111,17 @@ export default function useDenuncias() {
         try {
             localStorage.setItem(chaveStatus, JSON.stringify(atualizados));
             setStatusAlterados(atualizados);
+
+            // Gera Notificação (caso de uso do PI): avisa o autor da denúncia.
+            const denuncia = denuncias.find((item) => item.id === id);
+            if (denuncia?.autorEmail && denuncia.status !== status) {
+                registrarNotificacao({
+                    email: denuncia.autorEmail,
+                    denunciaId: id,
+                    titulo: `Denúncia #${id} atualizada`,
+                    mensagem: `O status de "${denuncia.titulo}" mudou de ${denuncia.status} para ${status}.`,
+                });
+            }
             setMensagemErro("");
             return true;
         } catch {
