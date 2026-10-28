@@ -25,9 +25,9 @@ export default function Header({
                     <img
                         src={`${import.meta.env.BASE_URL}simbolo-branco.svg`}
                         alt=""
-                        className="h-10 w-10 object-contain sm:h-12 sm:w-12"
+                        className="h-12 w-12 object-contain sm:h-16 sm:w-16"
                     />
-                    <span className="text-lg font-bold tracking-tight text-white sm:text-xl">
+                    <span className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                         Fala Votorantim
                     </span>
                 </NavLink>
