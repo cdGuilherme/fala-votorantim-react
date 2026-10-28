@@ -19,17 +19,15 @@ export default function Header({
     onFechar,
 }: HeaderProps) {
     return (
-        <header className="relative z-50 w-full bg-gradient-to-r from-[#1447E6] to-[#193CB8]">
+        <header className="absolute z-50 w-full bg-gradient-to-r from-[#1447E6] to-[#193CB8]">
             <div className="mx-auto flex min-h-[10vh] items-center justify-between px-5">
-                <NavLink to="/" className="flex shrink-0 items-center gap-3">
+                <NavLink to="/" className="shrink-0 flex justify-center items-center gap-5 text-white font-bold text-2xl">
                     <img
                         src={`${import.meta.env.BASE_URL}simbolo-branco.svg`}
-                        alt=""
-                        className="h-12 w-12 object-contain sm:h-16 sm:w-16"
+                        alt="Logo do Fala Votorantim"
+                        className="h-23 w-23 rounded-full object-cover md:h-20 md:w-20"
                     />
-                    <span className="text-xl font-bold tracking-tight text-white sm:text-2xl">
-                        Fala Votorantim
-                    </span>
+                    <p>Fala Votorantim</p>
                 </NavLink>
 
                 <nav className="hidden items-center gap-4 md:flex lg:gap-8">

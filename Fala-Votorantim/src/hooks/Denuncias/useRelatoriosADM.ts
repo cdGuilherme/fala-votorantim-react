@@ -147,18 +147,22 @@ export default function useRelatoriosADM() {
             type: "text/csv;charset=utf-8;",
         });
 
+        let url: string | null = null;
         try {
-            const url = URL.createObjectURL(arquivo);
+            url = URL.createObjectURL(arquivo);
             const link = document.createElement("a");
             link.href = url;
             link.download = "relatorio-fala-votorantim.csv";
             link.click();
-            URL.revokeObjectURL(url);
             setMensagemExportacao("");
         } catch {
             setMensagemExportacao(
                 "Não foi possível exportar o relatório neste navegador."
             );
+        } finally {
+            if (url) {
+                URL.revokeObjectURL(url);
+            }
         }
     }
 

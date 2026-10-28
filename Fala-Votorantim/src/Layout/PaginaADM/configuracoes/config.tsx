@@ -24,17 +24,9 @@ export default function Configuracoes() {
                 <div className="mx-auto max-w-5xl space-y-6">
                     <header className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                         <div>
-                            <p className="text-sm font-semibold text-blue-700">
-                                Administração / Sistema
-                            </p>
-
                             <h1 className="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">
                                 Configurações
                             </h1>
-
-                            <p className="mt-2 text-sm text-slate-500">
-                                Gerencie as preferências do sistema e da conta administrativa.
-                            </p>
                         </div>
 
                         <div className="flex items-center gap-2 self-start rounded-lg border border-slate-200 bg-white px-3 py-2 sm:self-auto">
@@ -83,7 +75,6 @@ export default function Configuracoes() {
                     <SecaoConfiguracao
                         id="gerais"
                         titulo="Configurações gerais"
-                        descricao="Informações básicas apresentadas pela plataforma."
                     >
                         <CampoTexto
                             id="nomeSistema"
@@ -116,22 +107,11 @@ export default function Configuracoes() {
                                 atualizarCampo("emailContato", valor)
                             }
                         />
-                        <div className="rounded-lg border border-blue-100 bg-blue-50 p-4">
-                            <p className="text-sm font-semibold text-blue-900">
-                                Sobre estas configurações
-                            </p>
-                            <p className="mt-1 text-sm leading-5 text-blue-800">
-                                Os valores são armazenados neste navegador. Alterá-los
-                                aqui ainda não modifica automaticamente o cabeçalho
-                                público ou os dados do servidor.
-                            </p>
-                        </div>
                     </SecaoConfiguracao>
 
                     <SecaoConfiguracao
                         id="notificacoes"
                         titulo="Notificações"
-                        descricao="Defina quais tipos de aviso você prefere habilitar nesta interface."
                     >
                         <div className="divide-y divide-slate-100">
                             <Interruptor
@@ -171,7 +151,6 @@ export default function Configuracoes() {
                     <SecaoConfiguracao
                         id="preferencias"
                         titulo="Preferências da interface"
-                        descricao="Personalize algumas opções de uso da área administrativa."
                     >
                         <div className="divide-y divide-slate-100">
                             <Interruptor
@@ -203,7 +182,6 @@ export default function Configuracoes() {
                     <SecaoConfiguracao
                         id="conta"
                         titulo="Conta administrativa"
-                        descricao="Dados de identificação exibidos nesta tela de configurações."
                     >
                         <CampoTexto
                             id="nomeAdministrador"
@@ -226,21 +204,6 @@ export default function Configuracoes() {
                                 atualizarCampo("emailAdministrador", valor)
                             }
                         />
-                        <div className="flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4">
-                            <span className="text-lg" aria-hidden="true">
-                                🔒
-                            </span>
-                            <div>
-                                <p className="text-sm font-semibold text-amber-900">
-                                    Segurança da conta
-                                </p>
-                                <p className="mt-1 text-sm leading-5 text-amber-800">
-                                    Esta tela usa armazenamento local para demonstração.
-                                    Não altera credenciais reais nem substitui autenticação
-                            remota.
-                                </p>
-                            </div>
-                        </div>
                     </SecaoConfiguracao>
 
                     {mensagem && (

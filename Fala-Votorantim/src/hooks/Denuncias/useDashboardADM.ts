@@ -114,6 +114,7 @@ export default function useDashboardADM() {
     );
 
     return {
+        denuncias,
         indicadores,
         maiorQuantidadeCategoria,
         mensagemErro,
