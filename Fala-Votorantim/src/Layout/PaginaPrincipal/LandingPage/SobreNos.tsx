@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import bandeira from "../../../assets/Bandeira de votorantim.png";
 function SobreNos() {
     return (
         <section className="bg-[#F5F8FF] px-6 py-24">
@@ -21,13 +21,14 @@ function SobreNos() {
                     </NavLink>
                 </div>
 
-                <div className="rounded-2xl bg-linear-to-br from-[#1447E6] to-[#193CB8] p-10 text-white shadow-xl shadow-[#1447E6]/20">
-                    <svg className="h-10 w-10 text-[#BEDBFF]" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4H8c0 2 1 3 3 3v3c-4 0-6-2-6-6V7Zm9 0h4v4h-3c0 2 1 3 3 3v3c-4 0-6-2-6-6V7Z" /></svg>
-                    <p className="mt-6 text-2xl font-semibold leading-snug">
-                        Acreditamos que cidades melhores são construídas quando a população participa ativamente.
-                    </p>
-                    <p className="mt-6 text-sm text-white/70">Equipe Fala Votorantim · Fatec Votorantim</p>
-                </div>
+           
+             <div className="rounded-2xl bg-linear-to-br from-[#] to-[#] p-10 text-white shadow-xl shadow-[#]/20">
+  <img
+    src={bandeira}
+    alt="Bandeira Votorantim"
+    className="mx-auto h-auto w-full max-w-sm rounded-xl object-cover"
+  />
+</div>
             </div>
         </section>
     )
