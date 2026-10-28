@@ -69,9 +69,9 @@
                                 Sobre o Fala Votorantim
                             </h1>
                             <p className="max-w-2xl text-lg text-white/85">
-                                 O Fala Votorantim é umtrabalho acadêmico,
-                                desenvolvido comoProjeto Interdisciplinar (PI) do
-                                curso superior deDesenvolvimento de Software Multiplataforma da
+                                 O Fala Votorantim é um trabalho acadêmico,
+                                desenvolvido como Projeto Interdisciplinar (PI) do
+                                curso superior de Desenvolvimento de Software Multiplataforma da
                                Fatec Votorantim. Trata-se de um protótipo funcional
                                 e não é um canal oficial da Prefeitura de Votorantim.
                             </p>
