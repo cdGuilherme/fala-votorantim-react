@@ -1,13 +1,11 @@
 import NavegacaoPublica from "../../NavegacaoPublica";
 import Footer from "../../../Components/Footer/Footer";
-import ResumoDenuncias from "../../FeedDenuncias/ResumoDenuncias";
 import FiltrosDenuncias from "../../FeedDenuncias/FiltrosDenuncias";
 import ListaDenuncias from "../../FeedDenuncias/ListaDenuncias";
 import useFeedDenuncias from "../../../hooks/Denuncias/useFeedDenuncias";
 
 export default function Feed() {
     const {
-        denuncias,
         filtradas,
         mensagemErro,
         busca,
@@ -43,8 +41,6 @@ export default function Feed() {
                             Acompanhe as denúncias registradas em Votorantim e o andamento de cada uma.
                         </p>
                     </header>
-
-                    <ResumoDenuncias denuncias={denuncias} />
 
                     {mensagemErro && (
                         <p

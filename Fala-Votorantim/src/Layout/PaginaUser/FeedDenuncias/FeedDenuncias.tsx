@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import LayoutUser from "../LayoutUser";
-import ResumoDenuncias from "../../FeedDenuncias/ResumoDenuncias";
 import FiltrosDenuncias from "../../FeedDenuncias/FiltrosDenuncias";
 import ListaDenuncias from "../../FeedDenuncias/ListaDenuncias";
 import DetalheDenuncia from "../../FeedDenuncias/DetalheDenuncia";
@@ -52,8 +51,6 @@ export default function FeedDenuncias() {
 
     return (
         <LayoutUser titulo="Feed de Denúncias" subtitulo="Favorite denúncias para acompanhá-las">
-
-            <ResumoDenuncias denuncias={denuncias} />
 
             {mensagemErro && (
                 <p role="status" className="rounded-xl border border-[#FDE68A] bg-[#FEFCE8] p-3 text-sm text-[#A65F00]">
