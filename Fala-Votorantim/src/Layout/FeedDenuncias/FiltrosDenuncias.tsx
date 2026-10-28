@@ -50,10 +50,7 @@ export default function FiltrosDenuncias({
 	onOrdemDataChange,
 }: FiltrosDenunciasProps) {
 	return (
-		<section className="flex flex-col gap-3 rounded-xl border border-[#A0AEC0] bg-white p-4">
-			<h2 className="text-lg font-semibold text-[#1E2939]">
-				Filtros
-			</h2>
+		<section className="flex flex-col gap-4 rounded-2xl border border-[#E5E7EB] bg-white p-4 sm:p-5">
 
 			{/* Busca e botão para expandir filtros */}
 			<div className="flex items-center gap-2">
@@ -61,9 +58,9 @@ export default function FiltrosDenuncias({
 					type="search"
 					value={busca}
 					onChange={(e) => onBuscaChange(e.target.value)}
-					placeholder="Buscar denúncia..."
+					placeholder="Buscar por título, código, descrição ou endereço"
 					aria-label="Buscar denúncia"
-					className="min-w-0 flex-1 rounded-xl border border-[#A0AEC0] bg-white px-3 py-3 text-base text-[#1E2939] outline-none placeholder:text-[#98A2B3] focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
+					className="min-w-0 flex-1 rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-4 py-3 text-base text-[#1E2939] outline-none transition placeholder:text-[#99A1AF] focus:border-[#1447E6] focus:bg-white focus:ring-4 focus:ring-[#1447E6]/10"
 				/>
 
 				<button
@@ -82,7 +79,7 @@ export default function FiltrosDenuncias({
 					}
 					className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition ${mostrarFiltros
 						? "border-[#1447E6] bg-blue-50 text-[#1447E6]"
-						: "border-[#A0AEC0] bg-white text-[#364152] hover:bg-gray-50"
+						: "border-[#E5E7EB] bg-white text-[#364152] hover:bg-[#F9FAFB]"
 						}`}
 				>
 					<svg
@@ -105,7 +102,7 @@ export default function FiltrosDenuncias({
 
 			{/* Filtros adicionais */}
 			{mostrarFiltros && (
-				<div className="flex flex-col gap-5">
+				<div className="flex flex-col gap-5 border-t border-[#F3F4F6] pt-5">
 
 					{/* Ordenação e período */}
 					<div className="grid grid-cols-1 items-end gap-4 md:grid-cols-3">
@@ -126,7 +123,7 @@ export default function FiltrosDenuncias({
 										e.target.value as "recentes" | "antigas"
 									)
 								}
-								className="h-10 w-full rounded-lg border border-[#A0AEC0] bg-white px-3 text-sm text-[#1E2939] outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
+								className="h-10 w-full rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#1E2939] outline-none focus:border-[#1447E6] focus:ring-4 focus:ring-[#1447E6]/10"
 							>
 								<option value="recentes">Mais recentes primeiro</option>
 								<option value="antigas">Mais antigas primeiro</option>
@@ -141,7 +138,7 @@ export default function FiltrosDenuncias({
 								value={dataInicial}
 								max={dataFinal || undefined}
 								onChange={(e) => onDataInicialChange(e.target.value)}
-								className="h-10 w-full rounded-lg border border-[#A0AEC0] bg-white px-3 text-sm outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
+								className="h-10 w-full rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm outline-none focus:border-[#1447E6] focus:ring-4 focus:ring-[#1447E6]/10"
 							/>
 						</label>
 
@@ -153,14 +150,14 @@ export default function FiltrosDenuncias({
 								value={dataFinal}
 								min={dataInicial || undefined}
 								onChange={(e) => onDataFinalChange(e.target.value)}
-								className="h-10 w-full rounded-lg border border-[#A0AEC0] bg-white px-3 text-sm outline-none focus:border-[#1447E6] focus:ring-2 focus:ring-blue-100"
+								className="h-10 w-full rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm outline-none focus:border-[#1447E6] focus:ring-4 focus:ring-[#1447E6]/10"
 							/>
 						</label>
 					</div>
 
 					<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 						{/* Categorias */}
-						<fieldset className="min-w-0 rounded-xl border border-[#D0D5DD] p-4">
+						<fieldset className="min-w-0 rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] p-4">
 							<legend className="px-2 text-base font-semibold text-[#1E2939]">
 								Categorias
 							</legend>
@@ -199,7 +196,7 @@ export default function FiltrosDenuncias({
 						</fieldset>
 
 						{/* Status */}
-						<fieldset className="min-w-0 rounded-xl border border-[#D0D5DD] p-4">
+						<fieldset className="min-w-0 rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] p-4">
 							<legend className="px-2 text-base font-semibold text-[#1E2939]">
 								Status
 							</legend>
@@ -229,7 +226,7 @@ export default function FiltrosDenuncias({
 					<button
 						type="button"
 						onClick={onLimparFiltros}
-						className="self-start rounded-lg border border-[#A0AEC0] px-4 py-2 text-sm font-medium text-[#364152] transition hover:bg-gray-50"
+						className="self-start rounded-lg px-4 py-2 text-sm font-semibold text-[#1447E6] transition hover:bg-[#EFF6FF]"
 					>
 						Limpar filtros
 					</button>
