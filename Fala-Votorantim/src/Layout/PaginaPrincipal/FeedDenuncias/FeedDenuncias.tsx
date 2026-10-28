@@ -30,14 +30,17 @@ export default function Feed() {
     return (
         <div className="flex min-h-screen flex-col">
             <NavegacaoPublica />
-            <main className="flex-1 bg-[#EFF6FF] px-4 py-8 sm:px-8 lg:px-[8vw]">
-                <div className="mx-auto flex w-full max-w-5xl flex-col gap-5">
-                    <header className="flex flex-col gap-1">
-                        <h1 className="text-3xl font-bold text-[#1E2939]">
+            <main className="flex-1 bg-[#F5F8FF] px-4 py-10 sm:px-8">
+                <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
+                    <header className="flex flex-col gap-2">
+                        <span className="text-sm font-semibold uppercase tracking-widest text-[#1447E6]">
+                            Transparência
+                        </span>
+                        <h1 className="text-3xl font-bold tracking-tight text-[#1E2939] md:text-4xl">
                             Feed de Denúncias
                         </h1>
-                        <p className="pl-1 text-base text-[#6A7282]">
-                            Acompanhe as denúncias registradas em Votorantim.
+                        <p className="text-[#6A7282]">
+                            Acompanhe as denúncias registradas em Votorantim e o andamento de cada uma.
                         </p>
                     </header>
 
@@ -46,7 +49,7 @@ export default function Feed() {
                     {mensagemErro && (
                         <p
                             role="status"
-                            className="rounded-lg bg-amber-50 p-3 text-sm text-amber-800"
+                            className="rounded-xl border border-[#FDE68A] bg-[#FEFCE8] p-3 text-sm text-[#A65F00]"
                         >
                             {mensagemErro}
                         </p>
