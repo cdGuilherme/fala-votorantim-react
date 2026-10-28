@@ -6,7 +6,8 @@
     width: calc(100% - 2rem);
     max-width: 64rem;
     height: 35rem;
-    margin: 2rem auto;
+    /* Espaço para o header, que fica sobreposto à página. */
+    margin: 7.5rem auto 2rem;
     overflow: hidden;
     border-radius: 1.25rem;
     background: var(--cor-branco);
@@ -165,7 +166,7 @@
         width: calc(100% - 1rem);
         height: auto;
         overflow: visible;
-        margin: 1rem auto;
+        margin: 7rem auto 1rem;
         background: transparent;
         border: none;
     }

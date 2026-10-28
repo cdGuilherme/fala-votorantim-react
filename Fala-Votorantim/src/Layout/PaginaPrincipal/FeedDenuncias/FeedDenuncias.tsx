@@ -30,7 +30,7 @@ export default function Feed() {
     return (
         <div className="flex min-h-screen flex-col">
             <NavegacaoPublica />
-            <main className="flex-1 bg-[#F5F8FF] px-4 py-10 sm:px-8">
+            <main className="flex-1 bg-[#F5F8FF] px-4 pb-10 pt-28 sm:px-8">
                 <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
                     <header className="flex flex-col gap-2">
                         <span className="text-sm font-semibold uppercase tracking-widest text-[#1447E6]">
