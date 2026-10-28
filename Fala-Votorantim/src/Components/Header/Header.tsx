@@ -23,7 +23,7 @@ export default function Header({
             <div className="mx-auto flex min-h-[10vh] items-center justify-between px-5">
                 <NavLink to="/" className="shrink-0">
                     <img
-                        src={`${import.meta.env.BASE_URL}Logo.png`}
+                        src={`${import.meta.env.BASE_URL}simbolo-branco.svg`}
                         alt="Logo do Fala Votorantim"
                         className="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12"
                     />
