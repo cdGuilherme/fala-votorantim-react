@@ -43,10 +43,40 @@ export const statusDisponiveis: Status[] = [
 ];
 
 export const estilosStatus: Record<Status, string> = {
-	Pendente: "border-yellow-300 bg-yellow-50 text-yellow-600",
-	"Em andamento": "border-blue-300 bg-blue-50 text-blue-600",
-	Resolvido: "border-green-300 bg-green-50 text-green-600",
+	Pendente: "border-[#FDE68A] bg-[#FEFCE8] text-[#A65F00]",
+	"Em andamento": "border-[#BEDBFF] bg-[#EFF6FF] text-[#1C398E]",
+	Resolvido: "border-[#B9F8CF] bg-[#F0FDF4] text-[#0D542B]",
 };
+
+// Cor do ponto e da faixa lateral de cada status.
+export const corStatus: Record<Status, string> = {
+	Pendente: "#F0B100",
+	"Em andamento": "#1447E6",
+	Resolvido: "#00A63E",
+};
+
+// Foto ilustrativa por categoria (créditos em public/denuncias/CREDITOS.md).
+const fotosCategoria: Record<string, string> = {
+	Buracos: "buraco",
+	"Problemas em vias públicas": "buraco",
+	"Calçadas danificadas": "calcada",
+	"Sinalização quebrada": "sinalizacao",
+	"Postes apagados": "iluminacao",
+	"Falta de iluminação": "iluminacao",
+	"Problemas elétricos urbanos": "iluminacao",
+	"Lixo acumulado": "lixo",
+	"Entulho irregular": "entulho",
+	"Terrenos abandonados": "terreno",
+	"Vazamentos de água": "vazamento",
+	Esgoto: "vazamento",
+};
+
+// A foto enviada pelo munícipe tem prioridade sobre a ilustrativa.
+export function imagemDenuncia(denuncia: Denuncia): string {
+	if (denuncia.anexoDataUrl?.startsWith("data:image/")) return denuncia.anexoDataUrl;
+	const foto = fotosCategoria[denuncia.categoria] ?? "buraco";
+	return `${import.meta.env.BASE_URL}denuncias/${foto}.jpg`;
+}
 
 export const denunciasIniciais: Denuncia[] = [
 	{

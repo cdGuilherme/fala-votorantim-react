@@ -21,18 +21,16 @@ export default function CadastroDenuncia() {
 
             <main className="min-w-0 flex-1 px-4 pb-8 pt-20 sm:px-6 lg:ml-64 lg:px-8 lg:pt-8">
 
-                {/* Só mostrando em que parte ele está acessando */}
                 <header className="mb-6">
                     <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl">
                         Cadastro de Denúncias
                     </h1>
 
-                    <p className="mt-2 text-sm text-gray-500 sm:text-base">
-                        Registre uma nova denúncia no sistema.
+                    <p className="mt-2 text-sm text-[#155DFC] sm:text-base">
+                        Registrar denúncia
                     </p>
                 </header>
 
-                {/* parte do formulário em si */}
                 <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
 
                     {/* 1 - parte de endereço */}

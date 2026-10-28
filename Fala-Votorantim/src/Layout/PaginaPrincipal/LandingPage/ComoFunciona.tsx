@@ -33,6 +33,8 @@ const coresStatus = ["bg-[#FEFCE8] text-[#A65F00]", "bg-[#EFF6FF] text-[#1C398E]
 
 function ComoFunciona() {
     return (
+
+        
         <section className="bg-[#F5F8FF] px-6 py-24">
             <div className="mx-auto max-w-6xl">
                 <div className="mx-auto mb-14 max-w-2xl text-center">

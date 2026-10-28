@@ -1,8 +1,29 @@
 import { useMemo, useState } from "react";
-import { denunciasIniciais } from "../../Layout/FeedDenuncias/dadosDenuncias";
-import type { Denuncia } from "../../Layout/FeedDenuncias/types";
+import {
+    denunciasIniciais,
+    statusDisponiveis,
+} from "../../Layout/FeedDenuncias/dadosDenuncias";
+import type { Denuncia, Status } from "../../Layout/FeedDenuncias/types";
 
 const chaveDenuncias = "fala-votorantim-denuncias";
+const chaveStatus = "fala-votorantim-status-denuncias";
+
+type StatusAlterados = Record<string, Status>;
+
+function carregarStatusAlterados(): StatusAlterados {
+    try {
+        const dados = localStorage.getItem(chaveStatus);
+        const salvos: unknown = dados ? JSON.parse(dados) : {};
+        if (typeof salvos !== "object" || salvos === null) return {};
+        return Object.fromEntries(
+            Object.entries(salvos).filter(([, status]) =>
+                statusDisponiveis.includes(status as Status)
+            )
+        ) as StatusAlterados;
+    } catch {
+        return {};
+    }
+}
 
 type EstadoInicial = {
     denuncias: Denuncia[];
@@ -54,9 +75,17 @@ export default function useDenuncias() {
     const [mensagemErro, setMensagemErro] = useState(
         estadoInicial.mensagemErro
     );
+    const [statusAlterados, setStatusAlterados] = useState(
+        carregarStatusAlterados
+    );
     const denuncias = useMemo(
-        () => [...denunciasIniciais, ...denunciasSalvas],
-        [denunciasSalvas]
+        () =>
+            [...denunciasIniciais, ...denunciasSalvas].map((denuncia) =>
+                statusAlterados[denuncia.id]
+                    ? { ...denuncia, status: statusAlterados[denuncia.id] }
+                    : denuncia
+            ),
+        [denunciasSalvas, statusAlterados]
     );
 
     function adicionarDenuncia(novaDenuncia: Denuncia): boolean {
@@ -75,10 +104,27 @@ export default function useDenuncias() {
         }
     }
 
+    function alterarStatus(id: string, status: Status): boolean {
+        const atualizados = { ...statusAlterados, [id]: status };
+
+        try {
+            localStorage.setItem(chaveStatus, JSON.stringify(atualizados));
+            setStatusAlterados(atualizados);
+            setMensagemErro("");
+            return true;
+        } catch {
+            setMensagemErro(
+                "Não foi possível salvar o novo status. O armazenamento local pode estar indisponível."
+            );
+            return false;
+        }
+    }
+
     return {
         denuncias,
         denunciasSalvas,
         mensagemErro,
         adicionarDenuncia,
+        alterarStatus,
     };
 }
